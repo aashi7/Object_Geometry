@@ -72,6 +72,7 @@ main (int argc, char** argv)
   std::ofstream output_file("output_angles_jun6.csv");
 
   pcl::PointCloud<pcl::PointXYZ>::Ptr cloud (new pcl::PointCloud<pcl::PointXYZ>);
+  pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_ball (new pcl::PointCloud<pcl::PointXYZ>);
   pcl::PointCloud<pcl::PointXYZ>::Ptr descriptor (new pcl::PointCloud<pcl::PointXYZ>);
 
   descriptor->width = 5000 ;
@@ -79,30 +80,36 @@ main (int argc, char** argv)
   descriptor->points.resize (descriptor->width * descriptor->height) ;
  std::cerr << descriptor->points.size() << std::endl ;
 
+
   pcl::PCDReader reader;
   // Replace the path below with the path where you saved your file
-  reader.read ("poisson_mesh_downsampled.pcd", *cloud); // Remember to download the file first!
+  reader.read ("poisson_mesh_downsampled.pcd", *cloud); // block_of_wood_12in
 
+  pcl::PCDReader reader_ball;
+  reader_ball.read ("6in_block_downsampled.pcd", *cloud_ball); // brine_mini_soccer_ball
   
   //descriptor_vector * descriptor = new descriptor_vector[460000] ;
  	
    // Create the normal estimation class, and pass the input dataset to it
   pcl::NormalEstimation<pcl::PointXYZ, pcl::Normal> ne;
+  pcl::NormalEstimation<pcl::PointXYZ, pcl::Normal> ne_ball;
   ne.setInputCloud (cloud);
-
+  ne_ball.setInputCloud (cloud_ball);
   // Create an empty kdtree representation, and pass it to the normal estimation object.
   // Its content will be filled inside the object, based on the given input dataset (as no other search surface is given).
   pcl::search::KdTree<pcl::PointXYZ>::Ptr tree (new pcl::search::KdTree<pcl::PointXYZ> ());
+  pcl::search::KdTree<pcl::PointXYZ>::Ptr tree_ball (new pcl::search::KdTree<pcl::PointXYZ> ());
   ne.setSearchMethod (tree);
-
+  ne.setSearchMethod (tree_ball);
   // Output datasets
   pcl::PointCloud<pcl::Normal>::Ptr cloud_normals (new pcl::PointCloud<pcl::Normal>);
-
+  pcl::PointCloud<pcl::Normal>::Ptr cloud_normals_ball (new pcl::PointCloud<pcl::Normal>);
   // Use all neighbors in a sphere of radius 3cm
   ne.setRadiusSearch (0.03);
-
+  ne_ball.setRadiusSearch (0.03);
   // Compute the features
   ne.compute (*cloud_normals);
+  ne_ball.compute (*cloud_normals_ball);
   //std::cerr << "size of the normals " << cloud_normals->points.size() << std::endl ; 
 
 /*  for ( int i = 0; i < cloud_normals->points.size() ; i++)
@@ -148,7 +155,7 @@ main (int argc, char** argv)
 			pu_pv[0] = x1-x2 ;
 			pu_pv[1] = y1-y2 ;
 			pu_pv[2] = z1-z2 ;
-			if ((dist > 0.029) && (dist < 0.031))
+			if ((dist > 0.0099) && (dist < 0.0101))
 			{
 		              descriptor->points[k].x = angle_between_vectors (nu, nv) ;
 			      descriptor->points[k].y = angle_between_vectors (nu, pv_pu) ;
@@ -169,17 +176,72 @@ main (int argc, char** argv)
 	pcl::octree::OctreePointCloud<pcl::PointXYZ> octree (voxelSize);
 	octree.setInputCloud(descriptor) ;
         octree.defineBoundingBox(0.0,0.0,0.0,3.14,3.14,3.14) ;   //octree.defineBoundingBox (minX, minY, minZ, maxX, maxY, maxZ)
-	octree.addPointsFromInputCloud ();
+	octree.addPointsFromInputCloud ();   // octree created for block
  
-        //Check if voxel at given point coordinates exist
+        int k_ball=0 ;
+ 	float dist_ball ;
+        float square_of_dist_ball ;
 	double X,Y,Z ;
 	bool occupied ;
-	X = 0.02 ; Y = 1.55 ; Z = 1.58 ;
-	occupied = octree.isVoxelOccupiedAtPoint (X,Y,Z) ;    
+	//float x1,y1,z1,x2,y2,z2 ;
+	//float nu[3], nv[3], pv_pu[3], pu_pv[3] ;
+
+  for ( int i = 0; i < cloud_normals_ball->points.size() ; i++)
+   {
+ 	for (int j = i+1 ; (j < cloud_normals_ball->points.size()) ; j++)     
+           {
+			x1 = cloud_ball->points[i].x ;
+			y1 = cloud_ball->points[i].y ;
+			z1 = cloud_ball->points[i].z ;
+			nu[0] = cloud_normals_ball->points[i].normal_x ;
+                        nu[1] = cloud_normals_ball->points[i].normal_y ;
+                        nu[2] = cloud_normals_ball->points[i].normal_z ;
+			x2 = cloud_ball->points[j].x ;
+			y2 = cloud_ball->points[j].y ;
+			z2 = cloud_ball->points[j].z ;
+			nv[0] = cloud_normals_ball->points[j].normal_x ;
+                        nv[1] = cloud_normals_ball->points[j].normal_y ;
+                        nv[2] = cloud_normals_ball->points[j].normal_z ;
+			square_of_dist = ((x2-x1)*(x2-x1)) + ((y2-y1)*(y2-y1)) + ((z2-z1)*(z2-z1)) ;
+			dist = sqrt(square_of_dist) ;
+			//std::cerr << dist ;
+			pv_pu[0] = x2-x1 ;
+			pv_pu[1] = y2-y1 ;
+			pv_pu[2] = z2-z1 ;
+			pu_pv[0] = x1-x2 ;
+			pu_pv[1] = y1-y2 ;
+			pu_pv[2] = z1-z2 ;
+			if ((dist > 0.0099) && (dist < 0.0101))
+			{
+		             X = angle_between_vectors (nu, nv) ;
+			     Y  = angle_between_vectors (nu, pv_pu) ;
+			     Z = angle_between_vectors (nv, pu_pv) ;
+			     // output_file << descriptor->points[k].x << "\t" << descriptor->points[k].y << "\t" << descriptor->points[k].z  ;
+                             // output_file << "\n";	
+			      //k_ball = k_ball + 1 ;
+			    
+			      occupied = octree.isVoxelOccupiedAtPoint (X,Y,Z) ;
+			      if (occupied == 1)
+					{
+					//k_ball = k_ball + 1 ;
+					std::cerr << "Objects Matched" << "\t" << k_ball << std::endl ;
+				        return(0); 
+					}
+			
+		      }
+                              
+           }
+   }
+
+
+        //Check if voxel at given point coordinates exist
+
+	//X = 0.02 ; Y = 1.55 ; Z = 1.58 ;
+	//occupied = octree.isVoxelOccupiedAtPoint (X,Y,Z) ;    
 
 	
 
-	std::cerr << occupied << std::endl ;	
+	//std::cerr << occupied << std::endl ;	
 
 	//std::cerr << descriptor->points[k-1].x << "\t" << descriptor->points[k-1].y << "\t" << descriptor->points[k-1].z  << std::endl ;
 
