@@ -73,13 +73,12 @@ main (int argc, char** argv)
     This is the "manual" method, perfect to understand but error prone !
   */
   Eigen::Matrix4f transform_1 = Eigen::Matrix4f::Identity();
-
   // Define a rotation matrix (see https://en.wikipedia.org/wiki/Rotation_matrix)
   float theta = M_PI/4; // The angle of rotation in radians
   transform_1 (0,0) = cos (theta);
-  transform_1 (0,1) = -sin(theta);
-  transform_1 (1,0) = sin (theta);
-  transform_1 (1,1) = cos (theta);
+  transform_1 (0,1) = sin(theta);
+  transform_1 (1,0) = -sin (theta);
+  transform_1 (1,1) = cos(theta);
   //    (row, column)
 
   // Define a translation of 2.5 meters on the x axis.
@@ -122,7 +121,7 @@ main (int argc, char** argv)
   pcl::visualization::PointCloudColorHandlerCustom<pcl::PointXYZ> transformed_cloud_color_handler (transformed_cloud, 230, 20, 20); // Red
   viewer.addPointCloud (transformed_cloud, transformed_cloud_color_handler, "transformed_cloud");
 
-  viewer.addCoordinateSystem (1.0, "cloud",0);
+  viewer.addCoordinateSystem (1.0, 0);
   viewer.setBackgroundColor(0.05, 0.05, 0.05, 0); // Setting background to a dark grey
   viewer.setPointCloudRenderingProperties (pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 2, "original_cloud");
   viewer.setPointCloudRenderingProperties (pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 2, "transformed_cloud");
