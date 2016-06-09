@@ -97,7 +97,7 @@ main (int argc, char** argv)
   transform_2.translation() << 2.5, 0.0, 0.0;
 
   // The same rotation matrix as before; theta radians arround Z axis
-  transform_2.rotate (Eigen::AngleAxisf (theta, Eigen::Vector3f::UnitZ()));
+  transform_2.rotate (Eigen::AngleAxisf (theta, Eigen::Vector3f::UnitY()));
 
   // Print the transformation
   printf ("\nMethod #2: using an Affine3f\n");
