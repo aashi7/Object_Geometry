@@ -1,0 +1,6 @@
+Number of filtered points
+712
+size of first file points 712
+size of the normals 712
+highest point: 0.130333
+lowest point: 0.0108063

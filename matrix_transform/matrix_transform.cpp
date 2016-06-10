@@ -82,7 +82,7 @@ main (int argc, char** argv)
   //    (row, column)
 
   // Define a translation of 2.5 meters on the x axis.
-  transform_1 (0,3) = 2.5;
+  //transform_1 (0,3) = 2.5;
 
   // Print the transformation
   printf ("Method #1: using a Matrix4f\n");
@@ -94,7 +94,7 @@ main (int argc, char** argv)
   Eigen::Affine3f transform_2 = Eigen::Affine3f::Identity();
 
   // Define a translation of 2.5 meters on the x axis.
-  transform_2.translation() << 2.5, 0.0, 0.0;
+  transform_2.translation() << 0.0, 0.0, 0.0;
 
   // The same rotation matrix as before; theta radians arround Z axis
   transform_2.rotate (Eigen::AngleAxisf (theta, Eigen::Vector3f::UnitY()));
