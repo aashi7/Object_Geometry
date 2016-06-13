@@ -1,712 +1,962 @@
-0curvature: 0.0166837
-1curvature: 0.0192348
-2curvature: 0.0216907
-3curvature: 0.0190866
-4curvature: 0.0186544
-5curvature: 0.0158962
-6curvature: 0.0178621
-7curvature: 0.0181658
-8curvature: 0.0228951
-9curvature: 0.0203599
-10curvature: 0.018075
-11curvature: 0.0197853
-12curvature: 0.0174371
-13curvature: 0.0169815
-14curvature: 0.0110703
-15curvature: 0.0123862
-16curvature: 0.0151459
-17curvature: 0.0126128
-18curvature: 0.014653
-19curvature: 0.0239008
-20curvature: 0.0147479
-21curvature: 0.0165433
-22curvature: 0.0106032
-23curvature: 0.00471098
-24curvature: 0.0059651
-25curvature: 0.00676018
-26curvature: 0.0135784
-27curvature: 0.021972
-28curvature: 0.0182311
-29curvature: 0.013124
-30curvature: 0.00712998
-31curvature: 0.00344975
-32curvature: 0.00527793
-33curvature: 0.0127128
-34curvature: 0.0162005
-35curvature: 0.014262
-36curvature: 0.00682346
-37curvature: 0.00305365
-38curvature: 0.000443902
-39curvature: 0.0050729
-40curvature: 0.00866388
-41curvature: 0.0186947
-42curvature: 0.0148114
-43curvature: 0.0179871
-44curvature: 0.00854974
-45curvature: 0.00541543
-46curvature: 0.00512605
-47curvature: 0.0125654
-48curvature: 0.0188696
-49curvature: 0.015906
-50curvature: 0.0192892
-51curvature: 0.0164597
-52curvature: 0.016442
-53curvature: 0.0210065
-54curvature: 0.0218267
-55curvature: 0.0192942
-56curvature: 0.0126894
-57curvature: 0.00390364
-58curvature: 0.00294236
-59curvature: 0.00324728
-60curvature: 0.00722627
-61curvature: 0.0203576
-62curvature: 0.0213957
-63curvature: 0.0187639
-64curvature: 0.0166422
-65curvature: 0.0117793
-66curvature: 0.00826889
-67curvature: 0.0104888
-68curvature: 0.0125556
-69curvature: 0.0136222
-70curvature: 0.01724
-71curvature: 0.0120788
-72curvature: 0.0176049
-73curvature: 0.0137718
-74curvature: 0.0150779
-75curvature: 0.0165416
-76curvature: 0.0161883
-77curvature: 0.013319
-78curvature: 0.0156409
-79curvature: 0.0147532
-80curvature: 0.0160565
-81curvature: 0.0175905
-82curvature: 0.0142797
-83curvature: 0.0159165
-84curvature: 0.014678
-85curvature: 0.0149444
-86curvature: 0.0171619
-87curvature: 0.0159331
-88curvature: 0.0156234
-89curvature: 0.0159223
-90curvature: 0.0162481
-91curvature: 0.0194056
-92curvature: 0.015544
-93curvature: 0.0127806
-94curvature: 0.0185616
-95curvature: 0.0148771
-96curvature: 0.0132596
-97curvature: 0.0153186
-98curvature: 0.0132737
-99curvature: 0.0122005
-100curvature: 0.0146648
-101curvature: 0.0157077
-102curvature: 0.0152703
-103curvature: 0.0168748
-104curvature: 0.0144804
-105curvature: 0.0187256
-106curvature: 0.0145377
-107curvature: 0.0148768
-108curvature: 0.0190017
-109curvature: 0.0227633
-110curvature: 0.0198753
-111curvature: 0.0162949
-112curvature: 0.0134102
-113curvature: 0.0186356
-114curvature: 0.0177281
-115curvature: 0.0187267
-116curvature: 0.0194029
-117curvature: 0.0166443
-118curvature: 0.0147814
-119curvature: 0.0133033
-120curvature: 0.0154225
-121curvature: 0.0103525
-122curvature: 0.0109311
-123curvature: 0.0113327
-124curvature: 0.0156365
-125curvature: 0.0176016
-126curvature: 0.0151554
-127curvature: 0.0128036
-128curvature: 0.0137862
-129curvature: 0.0126458
-130curvature: 0.0149435
-131curvature: 0.0136893
-132curvature: 0.012789
-133curvature: 0.00992528
-134curvature: 0.00855078
-135curvature: 0.0101749
-136curvature: 0.00923802
-137curvature: 0.00950457
-138curvature: 0.00946188
-139curvature: 0.0103457
-140curvature: 0.0115788
-141curvature: 0.0107053
-142curvature: 0.0093206
-143curvature: 0.00874247
-144curvature: 0.00895655
-145curvature: 0.00945972
-146curvature: 0.0130762
-147curvature: 0.0119143
-148curvature: 0.0114285
-149curvature: 0.00797517
-150curvature: 0.0107094
-151curvature: 0.0122259
-152curvature: 0.0088577
-153curvature: 0.00816569
-154curvature: 0.0123912
-155curvature: 0.0111333
-156curvature: 0.0101905
-157curvature: 0.0114594
-158curvature: 0.0107632
-159curvature: 0.0130898
-160curvature: 0.0105607
-161curvature: 0.0127085
-162curvature: 0.0111448
-163curvature: 0.00951921
-164curvature: 0.0119861
-165curvature: 0.0109496
-166curvature: 0.0102847
-167curvature: 0.0111958
-168curvature: 0.00979139
-169curvature: 0.0156903
-170curvature: 0.0115918
-171curvature: 0.00888312
-172curvature: 0.0109198
-173curvature: 0.012075
-174curvature: 0.00793509
-175curvature: 0.00718099
-176curvature: 0.0116661
-177curvature: 0.0101191
-178curvature: 0.00910066
-179curvature: 0.00970403
-180curvature: 0.0116328
-181curvature: 0.0110354
-182curvature: 0.0122092
-183curvature: 0.0114011
-184curvature: 0.0121977
-185curvature: 0.0122103
-186curvature: 0.0137403
-187curvature: 0.0162509
-188curvature: 0.0133365
-189curvature: 0.0119204
-190curvature: 0.0106639
-191curvature: 0.0111961
-192curvature: 0.0116059
-193curvature: 0.0108771
-194curvature: 0.0102461
-195curvature: 0.00975039
-196curvature: 0.00789049
-197curvature: 0.00754875
-198curvature: 0.00576501
-199curvature: 0.00783653
-200curvature: 0.0102389
-201curvature: 0.0108753
-202curvature: 0.00980845
-203curvature: 0.0091963
-204curvature: 0.010636
-205curvature: 0.00976512
-206curvature: 0.00856151
-207curvature: 0.00855426
-208curvature: 0.00865822
-209curvature: 0.00940331
-210curvature: 0.00631088
-211curvature: 0.00634323
-212curvature: 0.00728168
-213curvature: 0.00625175
-214curvature: 0.00833265
-215curvature: 0.00608955
-216curvature: 0.00788431
-217curvature: 0.00890565
-218curvature: 0.00883249
-219curvature: 0.00959454
-220curvature: 0.00954094
-221curvature: 0.00811097
-222curvature: 0.0105282
-223curvature: 0.00868555
-224curvature: 0.0112932
-225curvature: 0.0106599
-226curvature: 0.010505
-227curvature: 0.0107689
-228curvature: 0.00666253
-229curvature: 0.00786179
-230curvature: 0.00926521
-231curvature: 0.0091078
-232curvature: 0.00835696
-233curvature: 0.00682374
-234curvature: 0.0096528
-235curvature: 0.00936009
-236curvature: 0.00805466
-237curvature: 0.0110958
-238curvature: 0.00913696
-239curvature: 0.00848363
-240curvature: 0.00910685
-241curvature: 0.00839771
-242curvature: 0.00916378
-243curvature: 0.00950812
-244curvature: 0.00828142
-245curvature: 0.0100754
-246curvature: 0.00972241
-247curvature: 0.0096446
-248curvature: 0.00942534
-249curvature: 0.00984688
-250curvature: 0.00931328
-251curvature: 0.00947257
-252curvature: 0.0085093
-253curvature: 0.0106127
-254curvature: 0.00974913
-255curvature: 0.00953944
-256curvature: 0.00883063
-257curvature: 0.00802748
-258curvature: 0.00800742
-259curvature: 0.0103513
-260curvature: 0.0113378
-261curvature: 0.00926396
-262curvature: 0.00899974
-263curvature: 0.0102202
-264curvature: 0.00846213
-265curvature: 0.00887277
-266curvature: 0.0093861
-267curvature: 0.00838471
-268curvature: 0.00853613
-269curvature: 0.0102427
-270curvature: 0.00924246
-271curvature: 0.00865335
-272curvature: 0.0106553
-273curvature: 0.0097445
-274curvature: 0.00943583
-275curvature: 0.0101346
-276curvature: 0.00884601
-277curvature: 0.0107631
-278curvature: 0.00826854
-279curvature: 0.00981702
-280curvature: 0.00835924
-281curvature: 0.0113693
-282curvature: 0.00878182
-283curvature: 0.0101386
-284curvature: 0.00947166
-285curvature: 0.00806011
-286curvature: 0.0081966
-287curvature: 0.010871
-288curvature: 0.00805075
-289curvature: 0.00913727
-290curvature: 0.00880478
-291curvature: 0.00967123
-292curvature: 0.00856867
-293curvature: 0.00823887
-294curvature: 0.00852919
-295curvature: 0.00860465
-296curvature: 0.00933734
-297curvature: 0.00949482
-298curvature: 0.0106563
-299curvature: 0.00955068
-300curvature: 0.010045
-301curvature: 0.00978513
-302curvature: 0.00848598
-303curvature: 0.0106339
-304curvature: 0.00803762
-305curvature: 0.010665
-306curvature: 0.00971442
-307curvature: 0.00939089
-308curvature: 0.0106036
-309curvature: 0.00947423
-310curvature: 0.0088029
-311curvature: 0.00982523
-312curvature: 0.0109232
-313curvature: 0.0102602
-314curvature: 0.010422
-315curvature: 0.0112181
-316curvature: 0.0107151
-317curvature: 0.00877727
-318curvature: 0.00862451
-319curvature: 0.00908091
-320curvature: 0.00971009
-321curvature: 0.00923744
-322curvature: 0.00920376
-323curvature: 0.0107855
-324curvature: 0.0114457
-325curvature: 0.010124
-326curvature: 0.0109916
-327curvature: 0.00965685
-328curvature: 0.0101219
-329curvature: 0.0114723
-330curvature: 0.0089418
-331curvature: 0.0125919
-332curvature: 0.00921876
-333curvature: 0.0114399
-334curvature: 0.0087024
-335curvature: 0.0114221
-336curvature: 0.00799968
-337curvature: 0.00974296
-338curvature: 0.00818266
-339curvature: 0.00978059
-340curvature: 0.0079674
-341curvature: 0.00939475
-342curvature: 0.009538
-343curvature: 0.00921058
-344curvature: 0.00731561
-345curvature: 0.00860447
-346curvature: 0.00899839
-347curvature: 0.00968205
-348curvature: 0.00964002
-349curvature: 0.00983133
-350curvature: 0.00935364
-351curvature: 0.00930584
-352curvature: 0.00868265
-353curvature: 0.00883494
-354curvature: 0.0098591
-355curvature: 0.00988738
-356curvature: 0.00811998
-357curvature: 0.00979525
-358curvature: 0.0097044
-359curvature: 0.00957353
-360curvature: 0.00989867
-361curvature: 0.0107613
-362curvature: 0.00988774
-363curvature: 0.00985306
-364curvature: 0.0105171
-365curvature: 0.00944037
-366curvature: 0.0077998
-367curvature: 0.00807438
-368curvature: 0.00830781
-369curvature: 0.00935338
-370curvature: 0.0080255
-371curvature: 0.00819766
-372curvature: 0.0120739
-373curvature: 0.00876958
-374curvature: 0.00727409
-375curvature: 0.00945827
-376curvature: 0.0116554
-377curvature: 0.00959026
-378curvature: 0.01006
-379curvature: 0.00941044
-380curvature: 0.00919057
-381curvature: 0.00966896
-382curvature: 0.0093968
-383curvature: 0.0119157
-384curvature: 0.00987931
-385curvature: 0.0106492
-386curvature: 0.0097302
-387curvature: 0.00829564
-388curvature: 0.00971029
-389curvature: 0.00826045
-390curvature: 0.00975558
-391curvature: 0.00823124
-392curvature: 0.00725237
-393curvature: 0.0090421
-394curvature: 0.0106988
-395curvature: 0.00819391
-396curvature: 0.00866141
-397curvature: 0.00817353
-398curvature: 0.00914959
-399curvature: 0.00915252
-400curvature: 0.00958631
-401curvature: 0.00945486
-402curvature: 0.00935207
-403curvature: 0.00889941
-404curvature: 0.00936174
-405curvature: 0.00965544
-406curvature: 0.00877014
-407curvature: 0.00879904
-408curvature: 0.00827184
-409curvature: 0.00944435
-410curvature: 0.00886134
-411curvature: 0.00829541
-412curvature: 0.00962656
-413curvature: 0.0094008
-414curvature: 0.00825383
-415curvature: 0.00799051
-416curvature: 0.00751822
-417curvature: 0.00781691
-418curvature: 0.00824899
-419curvature: 0.00692804
-420curvature: 0.00753021
-421curvature: 0.00788742
-422curvature: 0.0069737
-423curvature: 0.00879527
-424curvature: 0.00606246
-425curvature: 0.00608245
-426curvature: 0.00674422
-427curvature: 0.00720317
-428curvature: 0.0086313
-429curvature: 0.00618506
-430curvature: 0.00717285
-431curvature: 0.00954541
-432curvature: 0.00866036
-433curvature: 0.00864112
-434curvature: 0.00790886
-435curvature: 0.00951098
-436curvature: 0.00777429
-437curvature: 0.00938681
-438curvature: 0.0082721
-439curvature: 0.00904965
-440curvature: 0.0103287
-441curvature: 0.00881766
-442curvature: 0.00728963
-443curvature: 0.00868775
-444curvature: 0.0117227
-445curvature: 0.00840822
-446curvature: 0.0065474
-447curvature: 0.00959293
-448curvature: 0.00655248
-449curvature: 0.00675117
-450curvature: 0.00851724
-451curvature: 0.00857522
-452curvature: 0.00689637
-453curvature: 0.00704282
-454curvature: 0.00869447
-455curvature: 0.0090527
-456curvature: 0.00949637
-457curvature: 0.00855277
-458curvature: 0.00815231
-459curvature: 0.0082551
-460curvature: 0.00974438
-461curvature: 0.00841985
-462curvature: 0.00910167
-463curvature: 0.00964574
-464curvature: 0.00963205
-465curvature: 0.00878404
-466curvature: 0.00950731
-467curvature: 0.0111479
-468curvature: 0.0105359
-469curvature: 0.00835506
-470curvature: 0.00870316
-471curvature: 0.00910194
-472curvature: 0.0088799
-473curvature: 0.00857686
-474curvature: 0.00769985
-475curvature: 0.00780752
-476curvature: 0.00930428
-477curvature: 0.00761468
-478curvature: 0.00788886
-479curvature: 0.00683212
-480curvature: 0.00744148
-481curvature: 0.00584547
-482curvature: 0.00651186
-483curvature: 0.00756413
-484curvature: 0.00710078
-485curvature: 0.00727688
-486curvature: 0.00763666
-487curvature: 0.00659164
-488curvature: 0.0062131
-489curvature: 0.00601961
-490curvature: 0.00654961
-491curvature: 0.00584678
-492curvature: 0.0070407
-493curvature: 0.00671447
-494curvature: 0.00636174
-495curvature: 0.00950913
-496curvature: 0.00834404
-497curvature: 0.00702718
-498curvature: 0.00938351
-499curvature: 0.00825871
-500curvature: 0.00836661
-501curvature: 0.00961658
-502curvature: 0.00814026
-503curvature: 0.0068579
-504curvature: 0.00818747
-505curvature: 0.00971045
-506curvature: 0.00742528
-507curvature: 0.00621933
-508curvature: 0.00646614
-509curvature: 0.00737704
-510curvature: 0.00715867
-511curvature: 0.00573724
-512curvature: 0.00818735
-513curvature: 0.00665245
-514curvature: 0.0100084
-515curvature: 0.00893752
-516curvature: 0.00708974
-517curvature: 0.0080036
-518curvature: 0.00840456
-519curvature: 0.00772072
-520curvature: 0.00858669
-521curvature: 0.00808325
-522curvature: 0.00799269
-523curvature: 0.00860275
-524curvature: 0.00867417
-525curvature: 0.00825636
-526curvature: 0.00838618
-527curvature: 0.00866863
-528curvature: 0.00904564
-529curvature: 0.00788238
-530curvature: 0.00774156
-531curvature: 0.00899544
-532curvature: 0.00848011
-533curvature: 0.00937865
-534curvature: 0.00960482
-535curvature: 0.00852103
-536curvature: 0.00903498
-537curvature: 0.00726252
-538curvature: 0.00676922
-539curvature: 0.00681661
-540curvature: 0.0078036
-541curvature: 0.00977606
-542curvature: 0.0101472
-543curvature: 0.00745709
-544curvature: 0.00683027
-545curvature: 0.00703831
-546curvature: 0.00754445
-547curvature: 0.00622487
-548curvature: 0.00547592
-549curvature: 0.00695505
-550curvature: 0.00735723
-551curvature: 0.0097266
-552curvature: 0.00768586
-553curvature: 0.00712851
-554curvature: 0.00727584
-555curvature: 0.00783579
-556curvature: 0.00846295
-557curvature: 0.00902148
-558curvature: 0.00732505
-559curvature: 0.00724706
-560curvature: 0.00865925
-561curvature: 0.00728599
-562curvature: 0.00858159
-563curvature: 0.00671104
-564curvature: 0.00715274
-565curvature: 0.00774801
-566curvature: 0.00833858
-567curvature: 0.00627486
-568curvature: 0.00699067
-569curvature: 0.0078335
-570curvature: 0.00728852
-571curvature: 0.00751577
-572curvature: 0.00843899
-573curvature: 0.00707725
-574curvature: 0.00690257
-575curvature: 0.00705431
-576curvature: 0.00865143
-577curvature: 0.00804374
-578curvature: 0.00829061
-579curvature: 0.00835042
-580curvature: 0.00654228
-581curvature: 0.00805206
-582curvature: 0.00789302
-583curvature: 0.00833995
-584curvature: 0.00796568
-585curvature: 0.00852675
-586curvature: 0.0091316
-587curvature: 0.00820834
-588curvature: 0.00784165
-589curvature: 0.00889837
-590curvature: 0.0085781
-591curvature: 0.00944635
-592curvature: 0.00944635
-593curvature: 0.00873491
-594curvature: 0.0106634
-595curvature: 0.0103658
-596curvature: 0.00983343
-597curvature: 0.00790175
-598curvature: 0.0074642
-599curvature: 0.00690594
-600curvature: 0.00839627
-601curvature: 0.00935921
-602curvature: 0.0106625
-603curvature: 0.00968089
-604curvature: 0.00836886
-605curvature: 0.00732032
-606curvature: 0.00609352
-607curvature: 0.0073015
-608curvature: 0.00900962
-609curvature: 0.00683578
-610curvature: 0.00905177
-611curvature: 0.0066702
-612curvature: 0.00651287
-613curvature: 0.0059763
-614curvature: 0.00917789
-615curvature: 0.00993435
-616curvature: 0.00689843
-617curvature: 0.00641279
-618curvature: 0.00660496
-619curvature: 0.0098832
-620curvature: 0.00954186
-621curvature: 0.00768804
-622curvature: 0.00728217
-623curvature: 0.00817163
-624curvature: 0.00742023
-625curvature: 0.00851353
-626curvature: 0.00935254
-627curvature: 0.00776224
-628curvature: 0.00664632
-629curvature: 0.0087673
-630curvature: 0.00936471
-631curvature: 0.00841354
-632curvature: 0.00834239
-633curvature: 0.0074146
-634curvature: 0.00737716
-635curvature: 0.00690924
-636curvature: 0.0107746
-637curvature: 0.00939024
-638curvature: 0.00594154
-639curvature: 0.00864897
-640curvature: 0.00843801
-641curvature: 0.00680587
-642curvature: 0.00717965
-643curvature: 0.00880023
-644curvature: 0.00978505
-645curvature: 0.00872986
-646curvature: 0.0088572
-647curvature: 0.00830756
-648curvature: 0.00735864
-649curvature: 0.00808291
-650curvature: 0.00937999
-651curvature: 0.00949373
-652curvature: 0.00881783
-653curvature: 0.0105603
-654curvature: 0.0122744
-655curvature: 0.0107491
-656curvature: 0.00869658
-657curvature: 0.00726315
-658curvature: 0.0120672
-659curvature: 0.0126136
-660curvature: 0.0116036
-661curvature: 0.00849684
-662curvature: 0.00744461
-663curvature: 0.00667701
-664curvature: 0.0108783
-665curvature: 0.0120681
-666curvature: 0.0132205
-667curvature: 0.0122277
-668curvature: 0.00889043
-669curvature: 0.00596982
-670curvature: 0.00721187
-671curvature: 0.00690143
-672curvature: 0.010866
-673curvature: 0.0104893
-674curvature: 0.0116981
-675curvature: 0.0139557
-676curvature: 0.0090595
-677curvature: 0.00731694
-678curvature: 0.00853812
-679curvature: 0.00835309
-680curvature: 0.00804326
-681curvature: 0.00673694
-682curvature: 0.00644524
-683curvature: 0.00631581
-684curvature: 0.00870192
-685curvature: 0.0111336
-686curvature: 0.0101533
-687curvature: 0.00994021
-688curvature: 0.00886394
-689curvature: 0.00835762
-690curvature: 0.0064181
-691curvature: 0.0066082
-692curvature: 0.00931726
-693curvature: 0.0106113
-694curvature: 0.0123235
-695curvature: 0.0109769
-696curvature: 0.00783801
-697curvature: 0.00650412
-698curvature: 0.00745598
-699curvature: 0.0090113
-700curvature: 0.01168
-701curvature: 0.0124443
-702curvature: 0.00906617
-703curvature: 0.00989311
-704curvature: 0.011123
-705curvature: 0.0145541
-706curvature: 0.0142529
-707curvature: 0.0143245
-708curvature: 0.0139513
-709curvature: 0.0107054
-710curvature: 0.0119083
-711curvature: 0.0103632
+0: curvature: 0.103683
+1: curvature: 0.0981286
+2: curvature: 0.0790303
+3: curvature: 0.0818903
+4: curvature: 0.0980455
+5: curvature: 0.0919621
+6: curvature: 0.0817902
+7: curvature: 0.0692621
+8: curvature: 0.0812602
+9: curvature: 0.076763
+10: curvature: 0.0696868
+11: curvature: 0.0900958
+12: curvature: 0.0763754
+13: curvature: 0.0763085
+14: curvature: 0.0673694
+15: curvature: 0.0710816
+16: curvature: 0.0835714
+17: curvature: 0.077375
+18: curvature: 0.0644767
+19: curvature: 0.0592869
+20: curvature: 0.0603265
+21: curvature: 0.0487578
+22: curvature: 0.0752233
+23: curvature: 0.0930638
+24: curvature: 0.069919
+25: curvature: 0.0834644
+26: curvature: 0.0614502
+27: curvature: 0.0710105
+28: curvature: 0.0541101
+29: curvature: 0.0532897
+30: curvature: 0.0654801
+31: curvature: 0.0681552
+32: curvature: 0.0622973
+33: curvature: 0.0834822
+34: curvature: 0.09296
+35: curvature: 0.090147
+36: curvature: 0.0657983
+37: curvature: 0.0597499
+38: curvature: 0.0731693
+39: curvature: 0.0856128
+40: curvature: 0.0946158
+41: curvature: 0.0881453
+42: curvature: 0.0730226
+43: curvature: 0.0835878
+44: curvature: 0.0899089
+45: curvature: 0.0958909
+46: curvature: 0.0897331
+47: curvature: 0.0976093
+48: curvature: 0.0843974
+49: curvature: 0.0899057
+50: curvature: 0.0767549
+51: curvature: 0.0901631
+52: curvature: 0.0875442
+53: curvature: 0.0611257
+54: curvature: 0.0433602
+55: curvature: 0.0776429
+56: curvature: 0.089335
+57: curvature: 0.0671324
+58: curvature: 0.0597851
+59: curvature: 0.0862528
+60: curvature: 0.0654574
+61: curvature: 0.060041
+62: curvature: 0.0398097
+63: curvature: 0.055717
+64: curvature: 0.0487903
+65: curvature: 0.0634301
+66: curvature: 0.0809965
+67: curvature: 0.0519625
+68: curvature: 0.0498163
+69: curvature: 0.0499292
+70: curvature: 0.0947173
+71: curvature: 0.0543605
+72: curvature: 0.0488333
+73: curvature: 0.0923632
+74: curvature: 0.078365
+75: curvature: 0.0556456
+76: curvature: 0.0768268
+77: curvature: 0.0899735
+78: curvature: 0.102556
+79: curvature: 0.0915792
+80: curvature: 0.0980767
+81: curvature: 0.0749495
+82: curvature: 0.0682527
+83: curvature: 0.0527555
+84: curvature: 0.0732009
+85: curvature: 0.0680147
+86: curvature: 0.0276751
+87: curvature: 0.0192136
+88: curvature: 0.0771513
+89: curvature: 0.0820558
+90: curvature: 0.0170027
+91: curvature: 0.0195822
+92: curvature: 0.0796014
+93: curvature: 0.0720486
+94: curvature: 0.0229229
+95: curvature: 0.015959
+96: curvature: 0.0469955
+97: curvature: 0.0233258
+98: curvature: 0.0511745
+99: curvature: 0.0650858
+100: curvature: 0.01756
+101: curvature: 0.0191251
+102: curvature: 0.0138613
+103: curvature: 0.0768561
+104: curvature: 0.0130344
+105: curvature: 0.0213096
+106: curvature: 0.0696075
+107: curvature: 0.0505488
+108: curvature: 0.0351539
+109: curvature: 0.050698
+110: curvature: 0.0696513
+111: curvature: 0.0784312
+112: curvature: 0.062837
+113: curvature: 0.064654
+114: curvature: 0.0766942
+115: curvature: 0.0631714
+116: curvature: 0.0508325
+117: curvature: 0.0679655
+118: curvature: 0.066876
+119: curvature: 0.0235273
+120: curvature: 0.00369194
+121: curvature: 0.0647143
+122: curvature: 0.0752495
+123: curvature: 0.000783482
+124: curvature: 0.000278056
+125: curvature: 0.0592078
+126: curvature: 0.0665432
+127: curvature: 0.000205997
+128: curvature: 0.00124319
+129: curvature: 0.0395259
+130: curvature: 0.0133173
+131: curvature: 0.043269
+132: curvature: 0.0571636
+133: curvature: 0.0010346
+134: curvature: 0.000236392
+135: curvature: 0.000328014
+136: curvature: 0.070632
+137: curvature: 0.000271668
+138: curvature: 0.00359611
+139: curvature: 0.0652734
+140: curvature: 0.0440123
+141: curvature: 0.0203278
+142: curvature: 0.0405932
+143: curvature: 0.0494919
+144: curvature: 0.0700669
+145: curvature: 0.0535857
+146: curvature: 0.0644551
+147: curvature: 0.0670824
+148: curvature: 0.0676996
+149: curvature: 0.053012
+150: curvature: 0.071763
+151: curvature: 0.0707826
+152: curvature: 0.0247482
+153: curvature: 0.0052965
+154: curvature: 0.0702537
+155: curvature: 0.0826123
+156: curvature: 0.000362636
+157: curvature: 0.000163465
+158: curvature: 0.0654372
+159: curvature: 0.0707538
+160: curvature: 0.000121717
+161: curvature: 0.00139976
+162: curvature: 0.0393563
+163: curvature: 0.0151731
+164: curvature: 0.0433706
+165: curvature: 0.0600878
+166: curvature: 0.000830885
+167: curvature: 0.000111448
+168: curvature: 0.0687364
+169: curvature: 0.000155676
+170: curvature: 0.0039392
+171: curvature: 0.0668896
+172: curvature: 0.0496539
+173: curvature: 0.0202367
+174: curvature: 0.0345966
+175: curvature: 0.0566035
+176: curvature: 0.0847094
+177: curvature: 0.0624817
+178: curvature: 0.0691761
+179: curvature: 0.0697224
+180: curvature: 0.053708
+181: curvature: 0.0499337
+182: curvature: 0.0672784
+183: curvature: 0.0665172
+184: curvature: 0.0231408
+185: curvature: 0.00325679
+186: curvature: 0.0706384
+187: curvature: 0.0652039
+188: curvature: 0.000230727
+189: curvature: 0.000151475
+190: curvature: 0.0602973
+191: curvature: 0.063658
+192: curvature: 0.000102039
+193: curvature: 0.00130686
+194: curvature: 0.0384716
+195: curvature: 0.013565
+196: curvature: 0.0294808
+197: curvature: 0.0582882
+198: curvature: 0.000854995
+199: curvature: 9.73951e-05
+200: curvature: 0.0697628
+201: curvature: 0.00010665
+202: curvature: 0.00319662
+203: curvature: 0.0679706
+204: curvature: 0.0602057
+205: curvature: 0.0195617
+206: curvature: 0.0334943
+207: curvature: 0.0530068
+208: curvature: 0.0726962
+209: curvature: 0.0594263
+210: curvature: 0.0684192
+211: curvature: 0.0684507
+212: curvature: 0.0647911
+213: curvature: 0.0521726
+214: curvature: 0.068977
+215: curvature: 0.0643185
+216: curvature: 0.0227657
+217: curvature: 0.00300903
+218: curvature: 0.066116
+219: curvature: 0.0746797
+220: curvature: 0.000309789
+221: curvature: 0.000144665
+222: curvature: 0.0679275
+223: curvature: 0.0678769
+224: curvature: 9.58937e-05
+225: curvature: 0.00131131
+226: curvature: 0.0111532
+227: curvature: 0.0380035
+228: curvature: 0.0145279
+229: curvature: 0.0288649
+230: curvature: 0.0546884
+231: curvature: 0.00125477
+232: curvature: 5.22894e-05
+233: curvature: 0.061961
+234: curvature: 7.87732e-05
+235: curvature: 0.00389759
+236: curvature: 0.0585953
+237: curvature: 0.0585697
+238: curvature: 0.0221763
+239: curvature: 0.0317803
+240: curvature: 0.0739456
+241: curvature: 0.0540815
+242: curvature: 0.0642224
+243: curvature: 0.0732238
+244: curvature: 0.0711414
+245: curvature: 0.0508339
+246: curvature: 0.0684441
+247: curvature: 0.0719264
+248: curvature: 0.0220349
+249: curvature: 0.00477569
+250: curvature: 0.0647533
+251: curvature: 0.0739828
+252: curvature: 0.000396042
+253: curvature: 0.000140303
+254: curvature: 0.0675421
+255: curvature: 0.0644007
+256: curvature: 7.72081e-05
+257: curvature: 0.00124452
+258: curvature: 0.0143106
+259: curvature: 0.041526
+260: curvature: 0.0162733
+261: curvature: 0.0243492
+262: curvature: 0.0548983
+263: curvature: 0.000948304
+264: curvature: 7.05595e-05
+265: curvature: 0.0583371
+266: curvature: 9.35869e-05
+267: curvature: 0.00367241
+268: curvature: 0.0584689
+269: curvature: 0.0224596
+270: curvature: 0.0314733
+271: curvature: 0.0740036
+272: curvature: 0.0415315
+273: curvature: 0.0557416
+274: curvature: 0.076215
+275: curvature: 0.068328
+276: curvature: 0.0489712
+277: curvature: 0.0626378
+278: curvature: 0.0674283
+279: curvature: 0.0233951
+280: curvature: 0.00479891
+281: curvature: 0.0673177
+282: curvature: 0.0697187
+283: curvature: 0.000377691
+284: curvature: 0.00014647
+285: curvature: 0.0715269
+286: curvature: 0.0691221
+287: curvature: 8.68018e-05
+288: curvature: 0.00129226
+289: curvature: 0.0411539
+290: curvature: 0.0158385
+291: curvature: 0.021604
+292: curvature: 0.0611014
+293: curvature: 0.00128319
+294: curvature: 7.83822e-05
+295: curvature: 0.0701342
+296: curvature: 9.60238e-05
+297: curvature: 0.0583693
+298: curvature: 0.0216432
+299: curvature: 0.0317339
+300: curvature: 0.0761867
+301: curvature: 0.0410737
+302: curvature: 0.0504145
+303: curvature: 0.0600692
+304: curvature: 0.0645751
+305: curvature: 0.0663717
+306: curvature: 0.0488598
+307: curvature: 0.0660233
+308: curvature: 0.066377
+309: curvature: 0.0222829
+310: curvature: 0.00385789
+311: curvature: 0.0671123
+312: curvature: 0.0719475
+313: curvature: 0.000446402
+314: curvature: 0.000134872
+315: curvature: 0.0677972
+316: curvature: 0.0572846
+317: curvature: 9.14856e-05
+318: curvature: 0.00116441
+319: curvature: 0.0417317
+320: curvature: 0.0151568
+321: curvature: 0.0185112
+322: curvature: 0.0608176
+323: curvature: 0.00131449
+324: curvature: 8.22725e-05
+325: curvature: 0.0734319
+326: curvature: 9.22255e-05
+327: curvature: 0.00358744
+328: curvature: 0.0477999
+329: curvature: 0.022331
+330: curvature: 0.0331675
+331: curvature: 0.0801714
+332: curvature: 0.0390748
+333: curvature: 0.0616581
+334: curvature: 0.0681142
+335: curvature: 0.0707318
+336: curvature: 0.0637518
+337: curvature: 0.0482076
+338: curvature: 0.062749
+339: curvature: 0.0622035
+340: curvature: 0.0232938
+341: curvature: 0.0049534
+342: curvature: 0.0635104
+343: curvature: 0.0722385
+344: curvature: 0.000381305
+345: curvature: 8.54839e-05
+346: curvature: 0.0638846
+347: curvature: 0.069313
+348: curvature: 6.69251e-05
+349: curvature: 0.00103358
+350: curvature: 0.0391534
+351: curvature: 0.0139395
+352: curvature: 0.0171299
+353: curvature: 0.0598584
+354: curvature: 0.00116902
+355: curvature: 6.81515e-05
+356: curvature: 0.0726959
+357: curvature: 8.46432e-05
+358: curvature: 0.00315064
+359: curvature: 0.0443386
+360: curvature: 0.0232491
+361: curvature: 0.0337072
+362: curvature: 0.0787311
+363: curvature: 0.0386979
+364: curvature: 0.0634097
+365: curvature: 0.0707685
+366: curvature: 0.0748369
+367: curvature: 0.0558129
+368: curvature: 0.0517669
+369: curvature: 0.0633202
+370: curvature: 0.0667121
+371: curvature: 0.0240162
+372: curvature: 0.00344571
+373: curvature: 0.0710062
+374: curvature: 0.0684427
+375: curvature: 0.00027862
+376: curvature: 8.76124e-05
+377: curvature: 0.0697544
+378: curvature: 0.0729858
+379: curvature: 7.43098e-05
+380: curvature: 0.00109926
+381: curvature: 0.0392521
+382: curvature: 0.0148363
+383: curvature: 0.0207961
+384: curvature: 0.064911
+385: curvature: 0.0013731
+386: curvature: 4.48314e-05
+387: curvature: 0.0737775
+388: curvature: 0.000107918
+389: curvature: 0.0032852
+390: curvature: 0.0449197
+391: curvature: 0.0236188
+392: curvature: 0.0340997
+393: curvature: 0.0804805
+394: curvature: 0.0400806
+395: curvature: 0.0672077
+396: curvature: 0.0695948
+397: curvature: 0.0677382
+398: curvature: 0.0656416
+399: curvature: 0.0517554
+400: curvature: 0.0629532
+401: curvature: 0.0657987
+402: curvature: 0.0247352
+403: curvature: 0.00424054
+404: curvature: 0.0677583
+405: curvature: 0.0741463
+406: curvature: 0.000422305
+407: curvature: 0.00012102
+408: curvature: 0.0757623
+409: curvature: 0.0701959
+410: curvature: 9.73599e-05
+411: curvature: 0.000982477
+412: curvature: 0.0402713
+413: curvature: 0.0145174
+414: curvature: 0.0195449
+415: curvature: 0.0634835
+416: curvature: 0.00130562
+417: curvature: 4.45755e-05
+418: curvature: 0.0752588
+419: curvature: 0.00010071
+420: curvature: 0.0446672
+421: curvature: 0.0216221
+422: curvature: 0.0346953
+423: curvature: 0.0799097
+424: curvature: 0.0390188
+425: curvature: 0.0618115
+426: curvature: 0.0682695
+427: curvature: 0.0685516
+428: curvature: 0.0683308
+429: curvature: 0.052139
+430: curvature: 0.0610692
+431: curvature: 0.0613025
+432: curvature: 0.0244477
+433: curvature: 0.0041571
+434: curvature: 0.0732643
+435: curvature: 0.0798058
+436: curvature: 0.000369602
+437: curvature: 0.000173413
+438: curvature: 0.0810402
+439: curvature: 0.0739963
+440: curvature: 0.000159005
+441: curvature: 0.00103639
+442: curvature: 0.00775957
+443: curvature: 0.0401518
+444: curvature: 0.0133945
+445: curvature: 0.018617
+446: curvature: 0.063868
+447: curvature: 0.00119124
+448: curvature: 5.0796e-05
+449: curvature: 0.0752134
+450: curvature: 9.42428e-05
+451: curvature: 0.00300318
+452: curvature: 0.0560203
+453: curvature: 0.0212644
+454: curvature: 0.0348808
+455: curvature: 0.0792094
+456: curvature: 0.0375558
+457: curvature: 0.0669107
+458: curvature: 0.0657393
+459: curvature: 0.0722724
+460: curvature: 0.0656784
+461: curvature: 0.0527804
+462: curvature: 0.0705147
+463: curvature: 0.0625162
+464: curvature: 0.0374543
+465: curvature: 0.00626262
+466: curvature: 0.0682059
+467: curvature: 0.0754427
+468: curvature: 0.000283626
+469: curvature: 0.000139401
+470: curvature: 0.0752212
+471: curvature: 0.0660361
+472: curvature: 0.000153589
+473: curvature: 0.0011086
+474: curvature: 0.0361944
+475: curvature: 0.0124753
+476: curvature: 0.0362945
+477: curvature: 0.0567848
+478: curvature: 0.00141078
+479: curvature: 7.57529e-05
+480: curvature: 0.0710819
+481: curvature: 8.02937e-05
+482: curvature: 0.00305615
+483: curvature: 0.0597743
+484: curvature: 0.0196663
+485: curvature: 0.03375
+486: curvature: 0.0857823
+487: curvature: 0.0387197
+488: curvature: 0.0707325
+489: curvature: 0.0643747
+490: curvature: 0.066444
+491: curvature: 0.0566544
+492: curvature: 0.052174
+493: curvature: 0.0786457
+494: curvature: 0.0578412
+495: curvature: 0.0260189
+496: curvature: 0.00827707
+497: curvature: 0.065739
+498: curvature: 0.0695579
+499: curvature: 0.000353211
+500: curvature: 0.000119287
+501: curvature: 0.083158
+502: curvature: 0.0669123
+503: curvature: 0.000161216
+504: curvature: 0.00103651
+505: curvature: 0.0367514
+506: curvature: 0.0192246
+507: curvature: 0.0119307
+508: curvature: 0.0374602
+509: curvature: 0.0553173
+510: curvature: 0.00110581
+511: curvature: 0.000110499
+512: curvature: 0.0736349
+513: curvature: 7.73301e-05
+514: curvature: 0.00274629
+515: curvature: 0.0616024
+516: curvature: 0.0189287
+517: curvature: 0.0320083
+518: curvature: 0.088002
+519: curvature: 0.0423392
+520: curvature: 0.0683764
+521: curvature: 0.0689197
+522: curvature: 0.0759363
+523: curvature: 0.0585146
+524: curvature: 0.0553891
+525: curvature: 0.0618115
+526: curvature: 0.061121
+527: curvature: 0.0247769
+528: curvature: 0.00553577
+529: curvature: 0.0674562
+530: curvature: 0.000344952
+531: curvature: 0.000151459
+532: curvature: 0.0728129
+533: curvature: 0.0722631
+534: curvature: 0.000137868
+535: curvature: 0.000943472
+536: curvature: 0.0336795
+537: curvature: 0.0106783
+538: curvature: 0.0369166
+539: curvature: 0.0572653
+540: curvature: 0.00148155
+541: curvature: 0.000211578
+542: curvature: 0.00011384
+543: curvature: 0.0706204
+544: curvature: 9.96213e-05
+545: curvature: 0.0025835
+546: curvature: 0.0490782
+547: curvature: 0.018535
+548: curvature: 0.0319782
+549: curvature: 0.0979591
+550: curvature: 0.0400648
+551: curvature: 0.0715309
+552: curvature: 0.0816008
+553: curvature: 0.0591794
+554: curvature: 0.0539335
+555: curvature: 0.0667919
+556: curvature: 0.0647189
+557: curvature: 0.0244602
+558: curvature: 0.00583814
+559: curvature: 0.0602142
+560: curvature: 0.000324146
+561: curvature: 0.000151405
+562: curvature: 0.0754269
+563: curvature: 0.0655041
+564: curvature: 0.000129977
+565: curvature: 0.000803437
+566: curvature: 0.0337503
+567: curvature: 0.0111782
+568: curvature: 0.0364389
+569: curvature: 0.0543804
+570: curvature: 0.00147904
+571: curvature: 0.00012358
+572: curvature: 9.7577e-05
+573: curvature: 0.0634911
+574: curvature: 0.000104017
+575: curvature: 0.00257855
+576: curvature: 0.0523994
+577: curvature: 0.0260837
+578: curvature: 0.0330664
+579: curvature: 0.0844718
+580: curvature: 0.0420659
+581: curvature: 0.0658935
+582: curvature: 0.0599312
+583: curvature: 0.0583364
+584: curvature: 0.0537606
+585: curvature: 0.0691892
+586: curvature: 0.0649353
+587: curvature: 0.0233698
+588: curvature: 0.0065926
+589: curvature: 0.0608826
+590: curvature: 0.000244753
+591: curvature: 0.000128555
+592: curvature: 0.0624208
+593: curvature: 0.000107853
+594: curvature: 0.000871474
+595: curvature: 0.0320078
+596: curvature: 0.0103228
+597: curvature: 0.0217612
+598: curvature: 0.0573985
+599: curvature: 0.00109639
+600: curvature: 6.69329e-05
+601: curvature: 0.0646688
+602: curvature: 0.000105968
+603: curvature: 0.00236522
+604: curvature: 0.0510883
+605: curvature: 0.0163647
+606: curvature: 0.0334805
+607: curvature: 0.0706223
+608: curvature: 0.0388289
+609: curvature: 0.0673537
+610: curvature: 0.0595454
+611: curvature: 0.0683615
+612: curvature: 0.0573393
+613: curvature: 0.0524668
+614: curvature: 0.0761578
+615: curvature: 0.0600161
+616: curvature: 0.0341361
+617: curvature: 0.00450364
+618: curvature: 0.054036
+619: curvature: 0.000208067
+620: curvature: 0.000103365
+621: curvature: 0.0541315
+622: curvature: 8.7085e-05
+623: curvature: 0.000704689
+624: curvature: 0.0320948
+625: curvature: 0.0101811
+626: curvature: 0.0107656
+627: curvature: 0.0369073
+628: curvature: 0.0504705
+629: curvature: 0.00045769
+630: curvature: 8.32255e-05
+631: curvature: 6.41044e-05
+632: curvature: 0.0558834
+633: curvature: 8.71437e-05
+634: curvature: 0.00245642
+635: curvature: 0.0660463
+636: curvature: 0.0232417
+637: curvature: 0.0332993
+638: curvature: 0.0824364
+639: curvature: 0.0405973
+640: curvature: 0.066442
+641: curvature: 0.0641897
+642: curvature: 0.0588991
+643: curvature: 0.053235
+644: curvature: 0.10416
+645: curvature: 0.0683018
+646: curvature: 0.0350811
+647: curvature: 0.00608416
+648: curvature: 0.0545169
+649: curvature: 0.000215779
+650: curvature: 0.000121858
+651: curvature: 0.0606456
+652: curvature: 7.63006e-05
+653: curvature: 0.000633784
+654: curvature: 0.0355128
+655: curvature: 0.0224548
+656: curvature: 0.0089628
+657: curvature: 0.0392761
+658: curvature: 0.0533375
+659: curvature: 0.000510905
+660: curvature: 0.000196552
+661: curvature: 6.44484e-05
+662: curvature: 0.0715603
+663: curvature: 6.63401e-05
+664: curvature: 0.00642978
+665: curvature: 0.0829477
+666: curvature: 0.080043
+667: curvature: 0.0247542
+668: curvature: 0.0470456
+669: curvature: 0.0682662
+670: curvature: 0.096742
+671: curvature: 0.0583468
+672: curvature: 0.0693659
+673: curvature: 0.0693314
+674: curvature: 0.0677687
+675: curvature: 0.0488294
+676: curvature: 0.0898553
+677: curvature: 0.0737363
+678: curvature: 0.0318563
+679: curvature: 0.00376503
+680: curvature: 0.0630556
+681: curvature: 0.000213251
+682: curvature: 6.7919e-05
+683: curvature: 0.0571851
+684: curvature: 6.55515e-05
+685: curvature: 0.000574574
+686: curvature: 0.0491607
+687: curvature: 0.0207203
+688: curvature: 0.0150256
+689: curvature: 0.0384484
+690: curvature: 0.000572326
+691: curvature: 0.000214135
+692: curvature: 5.27147e-05
+693: curvature: 0.0556886
+694: curvature: 5.64057e-05
+695: curvature: 0.0032178
+696: curvature: 0.0892189
+697: curvature: 0.0745257
+698: curvature: 0.0284154
+699: curvature: 0.053398
+700: curvature: 0.090887
+701: curvature: 0.0609248
+702: curvature: 0.0681501
+703: curvature: 0.0700607
+704: curvature: 0.0692574
+705: curvature: 0.0495684
+706: curvature: 0.0868076
+707: curvature: 0.0771222
+708: curvature: 0.0318902
+709: curvature: 0.0048194
+710: curvature: 0.0632787
+711: curvature: 0.000210366
+712: curvature: 8.82183e-05
+713: curvature: 0.0598839
+714: curvature: 7.30283e-05
+715: curvature: 0.000521425
+716: curvature: 0.0489508
+717: curvature: 0.0217313
+718: curvature: 0.014656
+719: curvature: 0.0310923
+720: curvature: 0.000540847
+721: curvature: 0.000272018
+722: curvature: 4.93146e-05
+723: curvature: 0.0632445
+724: curvature: 5.71874e-05
+725: curvature: 0.00543421
+726: curvature: 0.0920289
+727: curvature: 0.0745078
+728: curvature: 0.0258908
+729: curvature: 0.0479223
+730: curvature: 0.0801936
+731: curvature: 0.0887548
+732: curvature: 0.0602583
+733: curvature: 0.070481
+734: curvature: 0.0710944
+735: curvature: 0.0668219
+736: curvature: 0.049549
+737: curvature: 0.10837
+738: curvature: 0.0794272
+739: curvature: 0.0379277
+740: curvature: 0.00458269
+741: curvature: 0.0671529
+742: curvature: 0.000244482
+743: curvature: 0.000115805
+744: curvature: 0.0619967
+745: curvature: 8.30281e-05
+746: curvature: 0.000473924
+747: curvature: 0.050031
+748: curvature: 0.020968
+749: curvature: 0.0135268
+750: curvature: 0.0298739
+751: curvature: 0.000228321
+752: curvature: 5.78753e-05
+753: curvature: 0.0664834
+754: curvature: 6.6527e-05
+755: curvature: 0.00738173
+756: curvature: 0.100698
+757: curvature: 0.0760233
+758: curvature: 0.0292019
+759: curvature: 0.0541361
+760: curvature: 0.0662833
+761: curvature: 0.100076
+762: curvature: 0.0611148
+763: curvature: 0.067487
+764: curvature: 0.0676067
+765: curvature: 0.0752537
+766: curvature: 0.0501226
+767: curvature: 0.0996691
+768: curvature: 0.081428
+769: curvature: 0.0461322
+770: curvature: 0.005077
+771: curvature: 0.0809384
+772: curvature: 0.000317396
+773: curvature: 9.88017e-05
+774: curvature: 0.0610592
+775: curvature: 8.61394e-05
+776: curvature: 0.000367271
+777: curvature: 0.0489401
+778: curvature: 0.035569
+779: curvature: 0.0147513
+780: curvature: 0.0381308
+781: curvature: 0.00429322
+782: curvature: 0.00023635
+783: curvature: 7.64492e-05
+784: curvature: 0.0614622
+785: curvature: 7.83999e-05
+786: curvature: 0.00551517
+787: curvature: 0.094299
+788: curvature: 0.0713041
+789: curvature: 0.0265173
+790: curvature: 0.0522579
+791: curvature: 0.0740815
+792: curvature: 0.098558
+793: curvature: 0.0595976
+794: curvature: 0.0721529
+795: curvature: 0.0650961
+796: curvature: 0.0764048
+797: curvature: 0.0507247
+798: curvature: 0.108821
+799: curvature: 0.0801719
+800: curvature: 0.04083
+801: curvature: 0.0116165
+802: curvature: 0.0702744
+803: curvature: 0.000436827
+804: curvature: 7.95746e-05
+805: curvature: 0.0594015
+806: curvature: 6.46253e-05
+807: curvature: 0.000386919
+808: curvature: 0.0244534
+809: curvature: 0.0141911
+810: curvature: 0.0475669
+811: curvature: 0.00031477
+812: curvature: 8.75693e-05
+813: curvature: 0.0640195
+814: curvature: 8.01788e-05
+815: curvature: 0.00547504
+816: curvature: 0.0870758
+817: curvature: 0.0689532
+818: curvature: 0.0257218
+819: curvature: 0.0555796
+820: curvature: 0.078861
+821: curvature: 0.0967565
+822: curvature: 0.0553874
+823: curvature: 0.0706898
+824: curvature: 0.0678605
+825: curvature: 0.0713743
+826: curvature: 0.0487019
+827: curvature: 0.100462
+828: curvature: 0.0787262
+829: curvature: 0.0450724
+830: curvature: 0.0158346
+831: curvature: 0.0584767
+832: curvature: 0.000669658
+833: curvature: 0.000100881
+834: curvature: 0.0662588
+835: curvature: 0.000111933
+836: curvature: 0.000517896
+837: curvature: 0.0245762
+838: curvature: 0.018293
+839: curvature: 0.0506932
+840: curvature: 0.000358838
+841: curvature: 0.000218366
+842: curvature: 0.0475975
+843: curvature: 0.07062
+844: curvature: 0.000133299
+845: curvature: 0.00682916
+846: curvature: 0.0912779
+847: curvature: 0.0773075
+848: curvature: 0.0235336
+849: curvature: 0.0488347
+850: curvature: 0.0650793
+851: curvature: 0.0959564
+852: curvature: 0.058605
+853: curvature: 0.0656512
+854: curvature: 0.0712123
+855: curvature: 0.083919
+856: curvature: 0.06196
+857: curvature: 0.103294
+858: curvature: 0.0882422
+859: curvature: 0.0572599
+860: curvature: 0.031467
+861: curvature: 0.0726053
+862: curvature: 0.0170936
+863: curvature: 0.0060824
+864: curvature: 0.0536407
+865: curvature: 0.0185133
+866: curvature: 0.00664911
+867: curvature: 0.0287553
+868: curvature: 0.0235492
+869: curvature: 0.0511183
+870: curvature: 0.00992624
+871: curvature: 0.0129536
+872: curvature: 0.0490526
+873: curvature: 0.0758963
+874: curvature: 0.00909805
+875: curvature: 0.0111106
+876: curvature: 0.0962093
+877: curvature: 0.0821851
+878: curvature: 0.0301778
+879: curvature: 0.0572177
+880: curvature: 0.0836737
+881: curvature: 0.100583
+882: curvature: 0.0717562
+883: curvature: 0.0730491
+884: curvature: 0.108796
+885: curvature: 0.100009
+886: curvature: 0.0926469
+887: curvature: 0.123363
+888: curvature: 0.106101
+889: curvature: 0.0674842
+890: curvature: 0.0545769
+891: curvature: 0.0938799
+892: curvature: 0.0530355
+893: curvature: 0.0440089
+894: curvature: 0.076079
+895: curvature: 0.0626644
+896: curvature: 0.0471806
+897: curvature: 0.0472899
+898: curvature: 0.0481938
+899: curvature: 0.0489451
+900: curvature: 0.0614886
+901: curvature: 0.0394895
+902: curvature: 0.0417023
+903: curvature: 0.0826093
+904: curvature: 0.0493936
+905: curvature: 0.0567725
+906: curvature: 0.102545
+907: curvature: 0.0926079
+908: curvature: 0.0618113
+909: curvature: 0.0816233
+910: curvature: 0.0897038
+911: curvature: 0.111899
+912: curvature: 0.0952771
+913: curvature: 0.0916195
+914: curvature: 0.109934
+915: curvature: 0.10351
+916: curvature: 0.0942969
+917: curvature: 0.107339
+918: curvature: 0.117622
+919: curvature: 0.103654
+920: curvature: 0.0849926
+921: curvature: 0.0680975
+922: curvature: 0.0992613
+923: curvature: 0.0960294
+924: curvature: 0.0991956
+925: curvature: 0.0755567
+926: curvature: 0.0541101
+927: curvature: 0.0689645
+928: curvature: 0.0814464
+929: curvature: 0.0783796
+930: curvature: 0.0669962
+931: curvature: 0.0848515
+932: curvature: 0.0945434
+933: curvature: 0.0672714
+934: curvature: 0.0649685
+935: curvature: 0.0612928
+936: curvature: 0.0535518
+937: curvature: 0.0960513
+938: curvature: 0.0813266
+939: curvature: 0.0999238
+940: curvature: 0.0571332
+941: curvature: 0.0740312
+942: curvature: 0.0628232
+943: curvature: 0.0672936
+944: curvature: 0.0999851
+945: curvature: 0.0606632
+946: curvature: 0.0950398
+947: curvature: 0.0971044
+948: curvature: 0.0916989
+949: curvature: 0.0666275
+950: curvature: 0.0549562
+951: curvature: 0.0809763
+952: curvature: 0.0987312
+953: curvature: 0.11182
+954: curvature: 0.0969415
+955: curvature: 0.0617561
+956: curvature: 0.0825896
+957: curvature: 0.100017
+958: curvature: 0.105896
+959: curvature: 0.090082
+960: curvature: 0.0977879
+961: curvature: 0.108534

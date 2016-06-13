@@ -207,6 +207,7 @@ CMakeFiles/Features.dir/features.cpp.o: /usr/include/eigen3/Eigen/src/plugins/Co
 CMakeFiles/Features.dir/features.cpp.o: /usr/include/eigen3/Eigen/src/plugins/CommonCwiseUnaryOps.h
 CMakeFiles/Features.dir/features.cpp.o: /usr/include/eigen3/Eigen/src/plugins/MatrixCwiseBinaryOps.h
 CMakeFiles/Features.dir/features.cpp.o: /usr/include/eigen3/Eigen/src/plugins/MatrixCwiseUnaryOps.h
+CMakeFiles/Features.dir/features.cpp.o: /usr/include/pcl-1.7/pcl/ModelCoefficients.h
 CMakeFiles/Features.dir/features.cpp.o: /usr/include/pcl-1.7/pcl/PCLHeader.h
 CMakeFiles/Features.dir/features.cpp.o: /usr/include/pcl-1.7/pcl/PCLImage.h
 CMakeFiles/Features.dir/features.cpp.o: /usr/include/pcl-1.7/pcl/PCLPointCloud2.h
@@ -224,11 +225,13 @@ CMakeFiles/Features.dir/features.cpp.o: /usr/include/pcl-1.7/pcl/common/impl/com
 CMakeFiles/Features.dir/features.cpp.o: /usr/include/pcl-1.7/pcl/common/impl/eigen.hpp
 CMakeFiles/Features.dir/features.cpp.o: /usr/include/pcl-1.7/pcl/common/impl/io.hpp
 CMakeFiles/Features.dir/features.cpp.o: /usr/include/pcl-1.7/pcl/common/impl/projection_matrix.hpp
+CMakeFiles/Features.dir/features.cpp.o: /usr/include/pcl-1.7/pcl/common/impl/transforms.hpp
 CMakeFiles/Features.dir/features.cpp.o: /usr/include/pcl-1.7/pcl/common/io.h
 CMakeFiles/Features.dir/features.cpp.o: /usr/include/pcl-1.7/pcl/common/point_operators.h
 CMakeFiles/Features.dir/features.cpp.o: /usr/include/pcl-1.7/pcl/common/point_tests.h
 CMakeFiles/Features.dir/features.cpp.o: /usr/include/pcl-1.7/pcl/common/projection_matrix.h
 CMakeFiles/Features.dir/features.cpp.o: /usr/include/pcl-1.7/pcl/common/time.h
+CMakeFiles/Features.dir/features.cpp.o: /usr/include/pcl-1.7/pcl/common/transforms.h
 CMakeFiles/Features.dir/features.cpp.o: /usr/include/pcl-1.7/pcl/console/parse.h
 CMakeFiles/Features.dir/features.cpp.o: /usr/include/pcl-1.7/pcl/console/print.h
 CMakeFiles/Features.dir/features.cpp.o: /usr/include/pcl-1.7/pcl/conversions.h
@@ -295,4 +298,14 @@ CMakeFiles/Features.dir/features.cpp.o: /usr/include/pcl-1.7/pcl/search/octree.h
 CMakeFiles/Features.dir/features.cpp.o: /usr/include/pcl-1.7/pcl/search/organized.h
 CMakeFiles/Features.dir/features.cpp.o: /usr/include/pcl-1.7/pcl/search/pcl_search.h
 CMakeFiles/Features.dir/features.cpp.o: /usr/include/pcl-1.7/pcl/search/search.h
+CMakeFiles/Features.dir/features.cpp.o: /usr/include/pcl-1.7/pcl/surface/boost.h
+CMakeFiles/Features.dir/features.cpp.o: /usr/include/pcl-1.7/pcl/surface/concave_hull.h
+CMakeFiles/Features.dir/features.cpp.o: /usr/include/pcl-1.7/pcl/surface/convex_hull.h
+CMakeFiles/Features.dir/features.cpp.o: /usr/include/pcl-1.7/pcl/surface/gp3.h
+CMakeFiles/Features.dir/features.cpp.o: /usr/include/pcl-1.7/pcl/surface/impl/concave_hull.hpp
+CMakeFiles/Features.dir/features.cpp.o: /usr/include/pcl-1.7/pcl/surface/impl/convex_hull.hpp
+CMakeFiles/Features.dir/features.cpp.o: /usr/include/pcl-1.7/pcl/surface/impl/gp3.hpp
+CMakeFiles/Features.dir/features.cpp.o: /usr/include/pcl-1.7/pcl/surface/impl/reconstruction.hpp
+CMakeFiles/Features.dir/features.cpp.o: /usr/include/pcl-1.7/pcl/surface/qhull.h
+CMakeFiles/Features.dir/features.cpp.o: /usr/include/pcl-1.7/pcl/surface/reconstruction.h
 

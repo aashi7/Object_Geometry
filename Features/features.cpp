@@ -1,13 +1,15 @@
-#include <iostream>
 #include <pcl/common/impl/common.hpp>
 #include <pcl/io/pcd_io.h>
 #include <pcl/point_types.h>
 #include <pcl/filters/voxel_grid.h>
 #include <pcl/io/ply_io.h>
-#include <math.h> 
 #include <pcl/features/normal_3d.h>
 #include <pcl/console/parse.h>
 #include <pcl/octree/octree.h>
+#include <pcl/surface/concave_hull.h>
+#include <pcl/kdtree/kdtree_flann.h>
+#include <pcl/surface/gp3.h>
+#include <pcl_conversions/pcl_conversions.h>
 
 #include <iostream>
 #include <sstream>
@@ -15,51 +17,60 @@
 #include <vector>
 #include <algorithm>
 #include <iterator>
+#include <math.h>
+
+/* FUNCTION DECLARATIONS *************************************************************************************************************/
 
 float angle_between_vectors (float *nu, float *nv)
 {
-float l1, l2, angle, param ;
-l1 = sqrt(nu[0]*nu[0] + nu[1]*nu[1] + nu[2]*nu[2]) ;
-l2 = sqrt(nv[0]*nv[0] + nv[1]*nv[1] + nv[2]*nv[2]) ;
-float dot ;
-dot = nu[0]*nv[0] + nu[1]*nv[1] + nu[2]*nv[2] ;
-param = dot/(l1*l2) ;
-//if (param < 0)
-//param = -(param) ;
-angle = std::acos(param) ;
-angle = floor(angle*100 + 0.5)/100 ;  // round off to two decimal places
-return angle ;
+	float l1, l2, angle, param ;
+	l1 = sqrt(nu[0]*nu[0] + nu[1]*nu[1] + nu[2]*nu[2]) ;
+	l2 = sqrt(nv[0]*nv[0] + nv[1]*nv[1] + nv[2]*nv[2]) ;
+	float dot ;
+	dot = nu[0]*nv[0] + nu[1]*nv[1] + nu[2]*nv[2] ;
+	param = dot/(l1*l2) ;
+	//if (param < 0)
+	//param = -(param) ;
+	angle = std::acos(param) ;
+	angle = floor(angle*100 + 0.5)/100 ;  // round off to two decimal places
+	return angle ;
 }
 
-void
+	void
 showHelp(char * program_name)
 {
-  std::cout << std::endl;
-  std::cout << "Usage: " << program_name << " cloud_filename.[pcd|ply]" << std::endl;
-  std::cout << "-h:  Show this help." << std::endl;
+	std::cout << std::endl;
+	std::cout << "Usage: " << program_name << " cloud_filename.[pcd|ply]" << std::endl;
+	std::cout << "-h:  Show this help." << std::endl;
 }
+
 
 
 float calculateAreaPolygon(const pcl::PointCloud<pcl::PointXYZ> &polygon )
 {
-        float area=0.0;
-        int num_points = polygon.size();
-  int j = 0;
-        Eigen::Vector3f va,vb,res;
-        res(0) = res(1) = res(2) = 0.0f;
-  for (int i = 0; i < num_points; ++i)
-  {
-      j = (i + 1) % num_points;
-                        va = polygon[i].getVector3fMap();
-                        vb = polygon[j].getVector3fMap();
-      res += va.cross(vb);
-  }
-  area=res.norm();
-        return area*0.5;
+	float area=0.0;
+	int num_points = polygon.size();
+	int j = 0;
+	Eigen::Vector3f va,vb,res;
+	res(0) = res(1) = res(2) = 0.0f;
+	for (int i = 0; i < num_points; ++i)
+	{
+		j = (i + 1) % num_points;
+		va = polygon[i].getVector3fMap();
+		vb = polygon[j].getVector3fMap();
+		res += va.cross(vb);
+	}
+	area=res.norm();
+	return area*0.5;
 } 
+
+/*************************************************************************************************************************************/
 
 int main (int argc, char** argv)
 {
+
+	/* DOWNSAMPLING ********************************************************************************************************************/
+
 
 	// Fill in the cloud data
 	if (pcl::console::find_switch (argc, argv, "-h") || pcl::console::find_switch (argc, argv, "--help")) {
@@ -77,10 +88,10 @@ int main (int argc, char** argv)
 		filenames = pcl::console::parse_file_extension_argument (argc, argv, ".pcd");
 
 		if (filenames.size () != 1) {
-		  showHelp (argv[0]);
-		  return -1;
+			showHelp (argv[0]);
+			return -1;
 		} else {
-		file_is_pcd = true;
+			file_is_pcd = true;
 		}
 	}
 
@@ -93,11 +104,11 @@ int main (int argc, char** argv)
 
 
 	pcl::io::loadPCDFile (argv[filenames[0]], *cloud); 
-	
+
 	/*pcl::PLYReader reader;
 	// Replace the path below with the path where you saved your file
 	reader.read ("poisson_mesh.ply", *cloud); // Remember to download the file first!
-	*/
+	 */
 	std::cerr << "PointCloud before filtering: " << cloud->width * cloud->height 
 		<< " data points (" << pcl::getFieldsList (*cloud) << ")." << std::endl;
 
@@ -114,9 +125,9 @@ int main (int argc, char** argv)
 		<< " data points (" << pcl::getFieldsList (*cloud_filtered) << ")." << std::endl;
 
 	/*pcl::PCDWriter writer;
-	writer.write ("poisson_mesh_downsampled.pcd", *cloud_filtered, 
-			Eigen::Vector4f::Zero (), Eigen::Quaternionf::Identity (), false);
-	*/
+	  writer.write ("poisson_mesh_downsampled.pcd", *cloud_filtered, 
+	  Eigen::Vector4f::Zero (), Eigen::Quaternionf::Identity (), false);
+	 */
 
 	pcl::PointCloud<pcl::PointXYZ>::Ptr descriptor (new pcl::PointCloud<pcl::PointXYZ>);
 
@@ -125,20 +136,105 @@ int main (int argc, char** argv)
 	descriptor->points.resize (descriptor->width * descriptor->height) ;
 	std::cerr << descriptor->points.size() << std::endl ;
 
-	 pcl::PCDWriter writer;
-  	 writer.write ("out.pcd", *cloud_filtered, Eigen::Vector4f::Zero (), Eigen::Quaternionf::Identity (), false);
+	pcl::PCDWriter writer;
+	writer.write ("out.pcd", *cloud_filtered, Eigen::Vector4f::Zero (), Eigen::Quaternionf::Identity (), false);
+
+	/***********************************************************************************************************************************/
+
+	/* CALCULATING VOLUME AND SURFACE AREA ********************************************************************************************************************/
 
 	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_filtered_converted (new pcl::PointCloud<pcl::PointXYZ>);
-	pcl::PointCloud<pcl::PointXYZ> test;
+	pcl::PointCloud<pcl::PointXYZ>::Ptr test (new pcl::PointCloud<pcl::PointXYZ>);
 
 	pcl::PCDReader reader_ball;
-	reader_ball.read ("out.pcd", *cloud_filtered_converted);
-	reader_ball.read ("out.pcd", *test);	
-	std::cout<<data.size()<<std::endl;	
-	std::vector<pcl::PointXYZ> data = test.points;
+	reader_ball.read ("out.pcd", *cloud_filtered_converted);	
+	//std::vector<pcl::PointXYZ> data;
+
+	if (pcl::io::loadPCDFile<pcl::PointXYZ> ("out.pcd", *test) == -1) //* load the file
+	{
+		PCL_ERROR ("Couldn't read file test_pcd.pcd \n");
+		return (-1);
+	}	
+
+	/*pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_hull (new pcl::PointCloud<pcl::PointXYZ>);
+	  pcl::ConcaveHull<pcl::PointXYZ> chull;
+	  chull.setInputCloud(test);
+
+	  chull.reconstruct(*cloud_hull);*/
+
+	/*for (size_t i=0; i < test->points.size (); i++)
+	  {
+	  std::cout<< test->points[i].x <<std::endl;
+	  std::cout<< test->points[i].y <<std::endl;
+	  std::cout<< test->points[i].z <<std::endl;
+	  }*/
+	//std::cout<<data.size()<<std::endl;
+
+	// Load input file into a PointCloud<T> with an appropriate type
+	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud1 (new pcl::PointCloud<pcl::PointXYZ>);
+	pcl::PCLPointCloud2 cloud_blob;
+	pcl::io::loadPCDFile ("12_inch_block_downsampled.pcd", cloud_blob);
+	pcl::fromPCLPointCloud2 (cloud_blob, *cloud1);
+	//* the data should be available in cloud
+
+	// Normal estimation*
+	pcl::NormalEstimation<pcl::PointXYZ, pcl::Normal> n;
+	pcl::PointCloud<pcl::Normal>::Ptr normals1 (new pcl::PointCloud<pcl::Normal>);
+	pcl::search::KdTree<pcl::PointXYZ>::Ptr tree1 (new pcl::search::KdTree<pcl::PointXYZ>);
+	tree1->setInputCloud (cloud1);
+	n.setInputCloud (cloud1);
+	n.setSearchMethod (tree1);
+	n.setKSearch (20);
+	n.compute (*normals1);
+	//* normals should not contain the point normals + surface curvatures
+
+	// Concatenate the XYZ and normal fields*
+	pcl::PointCloud<pcl::PointNormal>::Ptr cloud_with_normals (new pcl::PointCloud<pcl::PointNormal>);
+	pcl::concatenateFields (*cloud1, *normals1, *cloud_with_normals);
+	//* cloud_with_normals = cloud + normals
+
+	// Create search tree*
+	pcl::search::KdTree<pcl::PointNormal>::Ptr tree2 (new pcl::search::KdTree<pcl::PointNormal>);
+	tree2->setInputCloud (cloud_with_normals);
+
+	// Initialize objects
+	pcl::GreedyProjectionTriangulation<pcl::PointNormal> gp3;
+	pcl::PolygonMesh triangles;
+
+	// Set the maximum distance between connected points (maximum edge length)
+	gp3.setSearchRadius (0.025);
+
+	// Set typical values for the parameters
+	gp3.setMu (2.5);
+	gp3.setMaximumNearestNeighbors (100);
+	gp3.setMaximumSurfaceAngle(M_PI/4); // 45 degrees
+	gp3.setMinimumAngle(M_PI/18); // 10 degrees
+	gp3.setMaximumAngle(2*M_PI/3); // 120 degrees
+	gp3.setNormalConsistency(false);
+
+	// Get result
+	gp3.setInputCloud (cloud_with_normals);
+	gp3.setSearchMethod (tree2);
+	gp3.reconstruct (triangles);
+
+	// Additional vertex information
+	std::vector<int> parts = gp3.getPartIDs();
+	std::vector<int> states = gp3.getPointStates();	
+
+	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud2 (new pcl::PointCloud<pcl::PointXYZ>);
+
+	pcl::PointCloud<pcl::PointXYZ> triangle_cloud;
+	pcl::fromPCLPointCloud2(triangles.cloud, triangle_cloud); 
+
+	std::cout<<"surface: "<<calculateAreaPolygon(triangle_cloud)<<std::endl;
+
+	/******************************************************************************************************************************************/	
+
+	/* CALCULATING CURVATURE AND NORMALS ********************************************************************************************************************/
+
 	// Create the normal estimation class, and pass the input dataset to it
 	pcl::NormalEstimation<pcl::PointXYZ, pcl::Normal> ne;	
-	
+
 	ne.setInputCloud (cloud_filtered_converted);
 
 	// Create an empty kdtree representation, and pass it to the normal estimation object.
@@ -162,6 +258,10 @@ int main (int argc, char** argv)
 
 	//pcl::PointCloud<pcl::PointXYZRGB>::Ptr point_cloud_ptr (new pcl::PointCloud<pcl::PointXYZRGB>);
 
+	/************************************************************************************************************************************/
+
+	/* PARSING DATA ********************************************************************************************************************/
+
 	int k=0 ;
 	float dist ;
 	float square_of_dist ;
@@ -173,123 +273,127 @@ int main (int argc, char** argv)
 
 	for ( int i = 0; i < cloud_normals->points.size() ; i++)
 	{
+		output_file<<cloud_filtered_converted->points[i].x<<","<<cloud_filtered_converted->points[i].y<<","<<cloud_filtered_converted->points[i].z<<std::endl;
 		if(cloud_filtered_converted->points[i].z > highest)
 		{
 			highest = cloud_filtered_converted->points[i].z;
 		}
 		if(cloud_filtered_converted->points[i].z < lowest)
 		{
-                        lowest = cloud_filtered_converted->points[i].z;
-                }
+			lowest = cloud_filtered_converted->points[i].z;
+		}
 		normals <<i <<": "<<" x-normal-> "<<cloud_normals->points[i].normal_x<<" y-normal-> "<<cloud_normals->points[i].normal_y<<" z-normal-> "<<cloud_normals->points[i].normal_z<<std::endl;
 		curvature <<i <<": curvature: "<<cloud_normals->points[i].curvature<<std::endl;
-		
+
 		/*
-		pcl::PointXYZRGB point;
-		point.x = cloud_filtered_converted->points[i].x;
-		point.y = cloud_filtered_converted->points[i].y;
-		point.z = cloud_filtered_converted->points[i].z;
-		point.r = 0;
-		point.g = 100;
-		point.b = 200;
-		point_cloud_ptr->points.push_back (point);
- 		*/
+		   pcl::PointXYZRGB point;
+		   point.x = cloud_filtered_converted->points[i].x;
+		   point.y = cloud_filtered_converted->points[i].y;
+		   point.z = cloud_filtered_converted->points[i].z;
+		   point.r = 0;
+		   point.g = 100;
+		   point.b = 200;
+		   point_cloud_ptr->points.push_back (point);
+		 */
 	}
 	output_file << "highest point: "<< highest<<std::endl;
 	output_file << "lowest point: "<< lowest<<std::endl;	
 	//pcl::PointCloud<pcl::PointXYZ>::Ptr test (new pcl::PointCloud<pcl::PointXYZ>);
 	//float surface_area = calculateAreaPolygon(test);
-        //std::cout<< surface_area<<std::endl;
+	//std::cout<< surface_area<<std::endl;
 
 	/*
 
-	descriptor->width = k ;
-	descriptor->height = 1 ;
-	descriptor->points.resize (descriptor->width * descriptor->height) ;
-	std::cerr << descriptor->points.size() << std::endl ;
-	float voxelSize = 0.01f ;  // how to find appropriate voxel resolution
-	pcl::octree::OctreePointCloud<pcl::PointXYZ> octree (voxelSize);
-	octree.setInputCloud(descriptor) ;
-	ctree.defineBoundingBox(0.0,0.0,0.0,3.14,3.14,3.14) ;   //octree.defineBoundingBox (minX, minY, minZ, maxX, maxY, maxZ)
-	octree.addPointsFromInputCloud ();   // octree created for block
+	   descriptor->width = k ;
+	   descriptor->height = 1 ;
+	   descriptor->points.resize (descriptor->width * descriptor->height) ;
+	   std::cerr << descriptor->points.size() << std::endl ;
+	   float voxelSize = 0.01f ;  // how to find appropriate voxel resolution
+	   pcl::octree::OctreePointCloud<pcl::PointXYZ> octree (voxelSize);
+	   octree.setInputCloud(descriptor) ;
+	   ctree.defineBoundingBox(0.0,0.0,0.0,3.14,3.14,3.14) ;   //octree.defineBoundingBox (minX, minY, minZ, maxX, maxY, maxZ)
+	   octree.addPointsFromInputCloud ();   // octree created for block
 
-	int k_ball=0 ;
-	float dist_ball ;
-	float square_of_dist_ball ;
-	double X,Y,Z ;
-	bool occupied ;
-	highest = cloud_ball->points[0].z;
+	   int k_ball=0 ;
+	   float dist_ball ;
+	   float square_of_dist_ball ;
+	   double X,Y,Z ;
+	   bool occupied ;
+	   highest = cloud_ball->points[0].z;
 
-	for ( int i = 0; i < cloud_normals_ball->points.size() ; i++)
+	   for ( int i = 0; i < cloud_normals_ball->points.size() ; i++)
+	   {
+	   if(cloud->points[i].z > highest){
+	   highest = cloud_ball->points[i].z;
+	   }
+	   for (int j = i+1 ; (j < cloud_normals_ball->points.size()) ; j++)     
+	   {
+	   x1 = cloud_ball->points[i].x ;
+	   y1 = cloud_ball->points[i].y ;
+	   z1 = cloud_ball->points[i].z ;
+	   nu[0] = cloud_normals_ball->points[i].normal_x ;
+	   nu[1] = cloud_normals_ball->points[i].normal_y ;
+	   nu[2] = cloud_normals_ball->points[i].normal_z ;
+	   x2 = cloud_ball->points[j].x ;
+	   y2 = cloud_ball->points[j].y ;
+	   z2 = cloud_ball->points[j].z ;
+	   nv[0] = cloud_normals_ball->points[j].normal_x ;
+	   nv[1] = cloud_normals_ball->points[j].normal_y ;
+	   nv[2] = cloud_normals_ball->points[j].normal_z ;
+	   square_of_dist = ((x2-x1)*(x2-x1)) + ((y2-y1)*(y2-y1)) + ((z2-z1)*(z2-z1)) ;
+	   dist = sqrt(square_of_dist) ;
+	//std::cerr << dist ;
+	pv_pu[0] = x2-x1 ;
+	pv_pu[1] = y2-y1 ;
+	pv_pu[2] = z2-z1 ;
+	pu_pv[0] = x1-x2 ;
+	pu_pv[1] = y1-y2 ;
+	pu_pv[2] = z1-z2 ;
+	if ((dist > 0.0099) && (dist < 0.0101))
 	{
-		if(cloud->points[i].z > highest){
-			highest = cloud_ball->points[i].z;
-		}
-		for (int j = i+1 ; (j < cloud_normals_ball->points.size()) ; j++)     
-		  {
-			  x1 = cloud_ball->points[i].x ;
-			  y1 = cloud_ball->points[i].y ;
-			  z1 = cloud_ball->points[i].z ;
-			  nu[0] = cloud_normals_ball->points[i].normal_x ;
-			  nu[1] = cloud_normals_ball->points[i].normal_y ;
-			  nu[2] = cloud_normals_ball->points[i].normal_z ;
-			  x2 = cloud_ball->points[j].x ;
-			  y2 = cloud_ball->points[j].y ;
-			  z2 = cloud_ball->points[j].z ;
-			  nv[0] = cloud_normals_ball->points[j].normal_x ;
-			  nv[1] = cloud_normals_ball->points[j].normal_y ;
-			  nv[2] = cloud_normals_ball->points[j].normal_z ;
-			  square_of_dist = ((x2-x1)*(x2-x1)) + ((y2-y1)*(y2-y1)) + ((z2-z1)*(z2-z1)) ;
-			  dist = sqrt(square_of_dist) ;
-			//std::cerr << dist ;
-			pv_pu[0] = x2-x1 ;
-			pv_pu[1] = y2-y1 ;
-			pv_pu[2] = z2-z1 ;
-			pu_pv[0] = x1-x2 ;
-			pu_pv[1] = y1-y2 ;
-			pu_pv[2] = z1-z2 ;
-			if ((dist > 0.0099) && (dist < 0.0101))
-			{
-				X = angle_between_vectors (nu, nv) ;
-				Y  = angle_between_vectors (nu, pv_pu) ;
-				Z = angle_between_vectors (nv, pu_pv) ;
-				// output_file << descriptor->points[k].x << "\t" << descriptor->points[k].y << "\t" << descriptor->points[k].z  ;
-				// output_file << "\n";	
-				//k_ball = k_ball + 1 ;
-				occupied = octree.isVoxelOccupiedAtPoint (X,Y,Z) ;
-				if (occupied == 1)
-				{
-				//k_ball = k_ball + 1 ;
-				std::cerr << "Objects Matched" << "\t" << k_ball << std::endl ;
-				return(0); 
-				}
+	X = angle_between_vectors (nu, nv) ;
+	Y  = angle_between_vectors (nu, pv_pu) ;
+	Z = angle_between_vectors (nv, pu_pv) ;
+	// output_file << descriptor->points[k].x << "\t" << descriptor->points[k].y << "\t" << descriptor->points[k].z  ;
+	// output_file << "\n";	
+	//k_ball = k_ball + 1 ;
+	occupied = octree.isVoxelOccupiedAtPoint (X,Y,Z) ;
+	if (occupied == 1)
+	{
+	//k_ball = k_ball + 1 ;
+	std::cerr << "Objects Matched" << "\t" << k_ball << std::endl ;
+	return(0); 
+	}
 
-			}
+	}
 
-		}
+	}
 
 	}	
 
-	*/
-	
+	 */
+
+	/***********************************************************************************************************************************/
+
+
 	/*
 
-	points.open("secondItemPoints.txt");
-	myfile<<"Second point \n";
-	myfile<<"second highest "<<highest;
-	for(int i = 0; i < cloud_normals->points.size(); i++){
-		points<<cloud->points[i].x<<", "<<cloud->points[i].y<<", "<<cloud->points[i].z<<"\n";
-		if(cloud->points[i].z >= highest - (highest/100)){
-			myfile<<cloud->points[i].x<<", "<<cloud->points[i].y<<", "<<cloud->points[i].z<<"\n";
-		}
-	}
-	points.close();
-	myfile.close();
+	   points.open("secondItemPoints.txt");
+	   myfile<<"Second point \n";
+	   myfile<<"second highest "<<highest;
+	   for(int i = 0; i < cloud_normals->points.size(); i++){
+	   points<<cloud->points[i].x<<", "<<cloud->points[i].y<<", "<<cloud->points[i].z<<"\n";
+	   if(cloud->points[i].z >= highest - (highest/100)){
+	   myfile<<cloud->points[i].x<<", "<<cloud->points[i].y<<", "<<cloud->points[i].z<<"\n";
+	   }
+	   }
+	   points.close();
+	   myfile.close();
 
-	std::cerr << "Objects Not Matched" << "\t" << k_ball << std::endl ;
-	
-	*/
-	
+	   std::cerr << "Objects Not Matched" << "\t" << k_ball << std::endl ;
+
+	 */
+
 	//output_file <<"Volume: "<<volume <<std::endl;
 	//output_file <<"Surface Area: "<<surface_area <<std::endl;
 
