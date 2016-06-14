@@ -48,29 +48,38 @@ showHelp(char * program_name)
 
 float calculateAreaPolygon(const pcl::PointCloud<pcl::PointXYZ> &polygon )
 {
-	float area, ai, aj, ak;
+	float area, ax, ay, az, bx, by, bz, cx, cy, cz;
 	area=0.0;
 	int num_points = polygon.size();
-	int j = 0;
-	Eigen::Vector3f va,vb,res;
+	int j, k;
+	j = k  = 0;
+	Eigen::Vector3f vect, res;
 	res(0) = res(1) = res(2) = 0.0f;
 	for (int i = 0; i < num_points; ++i)
 	{
 		j = (i + 1) % num_points;
-		std::cout<<"poly 1: "<<polygon[i]<<std::endl;
-		va = polygon[i].getVector3fMap();
-		vb = polygon[j].getVector3fMap();
-		std::cout<<"va: "<<va<<std::endl;
-		ai = va.y()*vb.z()-vb.y()*va.z();
-		aj = va.x()*vb.z()-vb.x()*va.z();
-		ak = va.x()*vb.y()-vb.x()*va.y();
-		va.x() = ai;
-		va.y() = -aj;
-		va.z() = ak;
-		//std::cout<<"va :"<<va<<std::endl;
-		res += va;
+		k = (i + 2) % num_points;		
+		cx = polygon[i].x;
+		cy = polygon[i].y;
+		cz = polygon[i].z;
+		ax = polygon[j].x;
+		ay = polygon[j].y;
+		az = polygon[j].z;
+		bx = polygon[k].x;
+		by = polygon[k].y;
+		bz = polygon[k].z;
+		ax = ax-cx;
+		ay = ay-cy;
+		az = az-cz;
+                bx = bx-cx;
+		by = by-cy;
+                bz = bz-cz;
+		cx = ay*bz-by*az;
+		cy = ax*bz-bx*az;
+		cz = ax*by-bx*ay;
+		area += sqrt(pow(cx, 2.0) + pow(cy, 2.0) + pow(cz, 2.0));
+		//vect.x() = fabs(cx);vect.y() = fabs(cy);vect.z() = fabs(cz);
 	}
-	area=res.norm();
 	return area*0.5;
 } 
 
@@ -216,12 +225,12 @@ int main (int argc, char** argv)
 
 	// Set typical values for the parameters
 	gp3.setMu (2.5);
-	/*gp3.setMaximumNearestNeighbors (100);
+	gp3.setMaximumNearestNeighbors (100);
 	gp3.setMaximumSurfaceAngle(M_PI/4); // 45 degrees
 	gp3.setMinimumAngle(M_PI/18); // 10 degrees
 	gp3.setMaximumAngle(2*M_PI/3); // 120 degrees
 	gp3.setNormalConsistency(false);
-	*/
+
 
 	// Get result
 	gp3.setInputCloud (cloud_with_normals);
@@ -231,8 +240,6 @@ int main (int argc, char** argv)
 	// Additional vertex information
 	std::vector<int> parts = gp3.getPartIDs();
 	std::vector<int> states = gp3.getPointStates();	
-
-	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud2 (new pcl::PointCloud<pcl::PointXYZ>);
 
 	pcl::PointCloud<pcl::PointXYZ> triangle_cloud;
 	pcl::fromPCLPointCloud2(triangles.cloud, triangle_cloud); 
