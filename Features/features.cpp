@@ -48,7 +48,8 @@ showHelp(char * program_name)
 
 float calculateAreaPolygon(const pcl::PointCloud<pcl::PointXYZ> &polygon )
 {
-	float area=0.0;
+	float area, ai, aj, ak;
+	area=0.0;
 	int num_points = polygon.size();
 	int j = 0;
 	Eigen::Vector3f va,vb,res;
@@ -56,9 +57,18 @@ float calculateAreaPolygon(const pcl::PointCloud<pcl::PointXYZ> &polygon )
 	for (int i = 0; i < num_points; ++i)
 	{
 		j = (i + 1) % num_points;
+		std::cout<<"poly 1: "<<polygon[i]<<std::endl;
 		va = polygon[i].getVector3fMap();
 		vb = polygon[j].getVector3fMap();
-		res += va.cross(vb);
+		std::cout<<"va: "<<va<<std::endl;
+		ai = va.y()*vb.z()-vb.y()*va.z();
+		aj = va.x()*vb.z()-vb.x()*va.z();
+		ak = va.x()*vb.y()-vb.x()*va.y();
+		va.x() = ai;
+		va.y() = -aj;
+		va.z() = ak;
+		//std::cout<<"va :"<<va<<std::endl;
+		res += va;
 	}
 	area=res.norm();
 	return area*0.5;
@@ -173,7 +183,7 @@ int main (int argc, char** argv)
 	// Load input file into a PointCloud<T> with an appropriate type
 	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud1 (new pcl::PointCloud<pcl::PointXYZ>);
 	pcl::PCLPointCloud2 cloud_blob;
-	pcl::io::loadPCDFile ("12_inch_block_downsampled.pcd", cloud_blob);
+	pcl::io::loadPCDFile ("out.pcd", cloud_blob);
 	pcl::fromPCLPointCloud2 (cloud_blob, *cloud1);
 	//* the data should be available in cloud
 
@@ -206,11 +216,12 @@ int main (int argc, char** argv)
 
 	// Set typical values for the parameters
 	gp3.setMu (2.5);
-	gp3.setMaximumNearestNeighbors (100);
+	/*gp3.setMaximumNearestNeighbors (100);
 	gp3.setMaximumSurfaceAngle(M_PI/4); // 45 degrees
 	gp3.setMinimumAngle(M_PI/18); // 10 degrees
 	gp3.setMaximumAngle(2*M_PI/3); // 120 degrees
 	gp3.setNormalConsistency(false);
+	*/
 
 	// Get result
 	gp3.setInputCloud (cloud_with_normals);
