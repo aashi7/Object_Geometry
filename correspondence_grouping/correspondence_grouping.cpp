@@ -248,6 +248,8 @@ main (int argc, char *argv[])
   descr_est.setSearchSurface (model);
   descr_est.compute (*model_descriptors);
 
+ // std::cout << "model_descriptors"  << model_descriptors->points[0].x << "\t" << model_descriptors->points[0].y << "\t" << model_descriptors->points[0].z << std::endl ;
+
   descr_est.setInputCloud (scene_keypoints);
   descr_est.setInputNormals (scene_normals);
   descr_est.setSearchSurface (scene);

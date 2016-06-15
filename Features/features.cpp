@@ -36,8 +36,7 @@ float angle_between_vectors (float *nu, float *nv)
 	return angle ;
 }
 
-	void
-showHelp(char * program_name)
+void showHelp(char * program_name)
 {
 	std::cout << std::endl;
 	std::cout << "Usage: " << program_name << " cloud_filename.[pcd|ply]" << std::endl;
@@ -45,43 +44,24 @@ showHelp(char * program_name)
 }
 
 
-
 float calculateAreaPolygon(const pcl::PointCloud<pcl::PointXYZ> &polygon )
 {
-	float area, ax, ay, az, bx, by, bz, cx, cy, cz;
-	area=0.0;
+	float area=0.0;
 	int num_points = polygon.size();
-	int j, k;
-	j = k  = 0;
-	Eigen::Vector3f vect, res;
+	int j = 0;
+	Eigen::Vector3f va,vb,res;
 	res(0) = res(1) = res(2) = 0.0f;
 	for (int i = 0; i < num_points; ++i)
 	{
 		j = (i + 1) % num_points;
-		k = (i + 2) % num_points;		
-		cx = polygon[i].x;
-		cy = polygon[i].y;
-		cz = polygon[i].z;
-		ax = polygon[j].x;
-		ay = polygon[j].y;
-		az = polygon[j].z;
-		bx = polygon[k].x;
-		by = polygon[k].y;
-		bz = polygon[k].z;
-		ax = ax-cx;
-		ay = ay-cy;
-		az = az-cz;
-                bx = bx-cx;
-		by = by-cy;
-                bz = bz-cz;
-		cx = ay*bz-by*az;
-		cy = ax*bz-bx*az;
-		cz = ax*by-bx*ay;
-		area += sqrt(pow(cx, 2.0) + pow(cy, 2.0) + pow(cz, 2.0));
-		//vect.x() = fabs(cx);vect.y() = fabs(cy);vect.z() = fabs(cz);
+		va = polygon[i].getVector3fMap();
+		vb = polygon[j].getVector3fMap();
+		res += va.cross(vb);
 	}
+	area=res.norm();
 	return area*0.5;
 } 
+
 
 /*************************************************************************************************************************************/
 
@@ -118,16 +98,14 @@ int main (int argc, char** argv)
 	std::ofstream curvature("curvature.txt");
 	std::ofstream normals("normals.txt");
 
-	pcl::PCLPointCloud2::Ptr cloud (new pcl::PCLPointCloud2 ());
+	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud (new pcl::PointCloud<pcl::PointXYZ>);	
 	pcl::PCLPointCloud2::Ptr cloud_filtered (new pcl::PCLPointCloud2 ());
 
 
-	pcl::io::loadPCDFile (argv[filenames[0]], *cloud); 
+	pcl::io::loadPCDFile<pcl::PointXYZ> ("my_pcd.pcd", *cloud);	
 
-	/*pcl::PLYReader reader;
-	// Replace the path below with the path where you saved your file
-	reader.read ("poisson_mesh.ply", *cloud); // Remember to download the file first!
-	 */
+	/*
+
 	std::cerr << "PointCloud before filtering: " << cloud->width * cloud->height 
 		<< " data points (" << pcl::getFieldsList (*cloud) << ")." << std::endl;
 
@@ -143,10 +121,6 @@ int main (int argc, char** argv)
 	std::cerr << "PointCloud after filtering: " << cloud_filtered->width * cloud_filtered->height 
 		<< " data points (" << pcl::getFieldsList (*cloud_filtered) << ")." << std::endl;
 
-	/*pcl::PCDWriter writer;
-	  writer.write ("poisson_mesh_downsampled.pcd", *cloud_filtered, 
-	  Eigen::Vector4f::Zero (), Eigen::Quaternionf::Identity (), false);
-	 */
 
 	pcl::PointCloud<pcl::PointXYZ>::Ptr descriptor (new pcl::PointCloud<pcl::PointXYZ>);
 
@@ -158,22 +132,11 @@ int main (int argc, char** argv)
 	pcl::PCDWriter writer;
 	writer.write ("out.pcd", *cloud_filtered, Eigen::Vector4f::Zero (), Eigen::Quaternionf::Identity (), false);
 
+	*/
+		
 	/***********************************************************************************************************************************/
 
-	/* CALCULATING VOLUME AND SURFACE AREA ********************************************************************************************************************/
-
-	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_filtered_converted (new pcl::PointCloud<pcl::PointXYZ>);
-	pcl::PointCloud<pcl::PointXYZ>::Ptr test (new pcl::PointCloud<pcl::PointXYZ>);
-
-	pcl::PCDReader reader_ball;
-	reader_ball.read ("out.pcd", *cloud_filtered_converted);	
-	//std::vector<pcl::PointXYZ> data;
-
-	if (pcl::io::loadPCDFile<pcl::PointXYZ> ("out.pcd", *test) == -1) //* load the file
-	{
-		PCL_ERROR ("Couldn't read file test_pcd.pcd \n");
-		return (-1);
-	}	
+	/* CALCULATING VOLUME AND SURFACE AREA ********************************************************************************************************************/		
 
 	/*pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_hull (new pcl::PointCloud<pcl::PointXYZ>);
 	  pcl::ConcaveHull<pcl::PointXYZ> chull;
@@ -190,18 +153,18 @@ int main (int argc, char** argv)
 	//std::cout<<data.size()<<std::endl;
 
 	// Load input file into a PointCloud<T> with an appropriate type
-	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud1 (new pcl::PointCloud<pcl::PointXYZ>);
+	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_filtered_converted (new pcl::PointCloud<pcl::PointXYZ>);
 	pcl::PCLPointCloud2 cloud_blob;
-	pcl::io::loadPCDFile ("out.pcd", cloud_blob);
-	pcl::fromPCLPointCloud2 (cloud_blob, *cloud1);
+	pcl::io::loadPCDFile ("my_pcd.pcd", cloud_blob);
+	pcl::fromPCLPointCloud2 (cloud_blob, *cloud_filtered_converted);
 	//* the data should be available in cloud
 
 	// Normal estimation*
 	pcl::NormalEstimation<pcl::PointXYZ, pcl::Normal> n;
 	pcl::PointCloud<pcl::Normal>::Ptr normals1 (new pcl::PointCloud<pcl::Normal>);
 	pcl::search::KdTree<pcl::PointXYZ>::Ptr tree1 (new pcl::search::KdTree<pcl::PointXYZ>);
-	tree1->setInputCloud (cloud1);
-	n.setInputCloud (cloud1);
+	tree1->setInputCloud (cloud_filtered_converted);
+	n.setInputCloud (cloud_filtered_converted);
 	n.setSearchMethod (tree1);
 	n.setKSearch (20);
 	n.compute (*normals1);
@@ -209,7 +172,7 @@ int main (int argc, char** argv)
 
 	// Concatenate the XYZ and normal fields*
 	pcl::PointCloud<pcl::PointNormal>::Ptr cloud_with_normals (new pcl::PointCloud<pcl::PointNormal>);
-	pcl::concatenateFields (*cloud1, *normals1, *cloud_with_normals);
+	pcl::concatenateFields (*cloud_filtered_converted, *normals1, *cloud_with_normals);
 	//* cloud_with_normals = cloud + normals
 
 	// Create search tree*
@@ -291,18 +254,31 @@ int main (int argc, char** argv)
 
 	for ( int i = 0; i < cloud_normals->points.size() ; i++)
 	{
-		output_file<<cloud_filtered_converted->points[i].x<<","<<cloud_filtered_converted->points[i].y<<","<<cloud_filtered_converted->points[i].z<<std::endl;
-		if(cloud_filtered_converted->points[i].z > highest)
+		output_file<<i<<": "<<triangle_cloud.points[i].x<<", "<<triangle_cloud.points[i].y<<", "<<triangle_cloud.points[i].z<<std::endl;
+		if(triangle_cloud.points[i].z > highest)
 		{
-			highest = cloud_filtered_converted->points[i].z;
+			highest = triangle_cloud.points[i].z;
 		}
-		if(cloud_filtered_converted->points[i].z < lowest)
+		if(triangle_cloud.points[i].z < lowest)
 		{
-			lowest = cloud_filtered_converted->points[i].z;
+			lowest = triangle_cloud.points[i].z;
 		}
-		normals <<i <<": "<<" x-normal-> "<<cloud_normals->points[i].normal_x<<" y-normal-> "<<cloud_normals->points[i].normal_y<<" z-normal-> "<<cloud_normals->points[i].normal_z<<std::endl;
-		curvature <<i <<": curvature: "<<cloud_normals->points[i].curvature<<std::endl;
+		normals <<i+1 <<": "<<" x-normal-> "<<cloud_normals->points[i].normal_x<<" y-normal-> "<<cloud_normals->points[i].normal_y<<" z-normal-> "<<cloud_normals->points[i].normal_z<<std::endl;
+		curvature <<i+1 <<": curvature: "<<cloud_normals->points[i].curvature<<std::endl;
 
+		if(i != cloud_normals->points.size()-1){
+			float x = cloud->points[i+1].x - cloud->points[i].x;
+			float y = cloud->points[i+1].y - cloud->points[i].y;
+			float z = cloud->points[i+1].z - cloud->points[i].z;
+			float dist = sqrt(pow(x, 2)+pow(y, 2) + pow(z, 2));
+			output_file << i+1 <<" -> "<< i+2 << " distance normal: " << dist <<std::endl;
+			
+			float nx = triangle_cloud.points[i+1].x - triangle_cloud.points[i].x;
+			float ny = triangle_cloud.points[i+1].y - triangle_cloud.points[i].y;
+			float nz = triangle_cloud.points[i+1].z - triangle_cloud.points[i].z;
+			float ndist = sqrt(pow(nx, 2)+pow(ny, 2) + pow(nz, 2));
+			output_file << i+1 <<" -> "<< i+2 << " distance triangulated: " << ndist <<std::endl;
+		}	
 		/*
 		   pcl::PointXYZRGB point;
 		   point.x = cloud_filtered_converted->points[i].x;
