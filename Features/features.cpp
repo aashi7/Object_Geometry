@@ -44,21 +44,43 @@ void showHelp(char * program_name)
 }
 
 
-float calculateAreaPolygon(const pcl::PointCloud<pcl::PointXYZ> &polygon )
+float calculateAreaPolygon(pcl::PolygonMesh &polygon, const pcl::PointCloud<pcl::PointXYZ> &cloud)
 {
+	std::cout<<"in calculateAreaPolgyon"<<std::endl;
 	float area=0.0;
-	int num_points = polygon.size();
-	int j = 0;
-	Eigen::Vector3f va,vb,res;
-	res(0) = res(1) = res(2) = 0.0f;
-	for (int i = 0; i < num_points; ++i)
+	int num_triangles = polygon.polygons.capacity();
+	std::cout<<num_triangles<<" triangles"<<std::endl;
+	int j, k, ax, ay, az, bx, by, bz, cx, cy, cz, acx, acy, acz, abx, aby, abz, x, y, z;
+	for (int i = 0; i < 8; i++)
 	{
-		j = (i + 1) % num_points;
-		va = polygon[i].getVector3fMap();
-		vb = polygon[j].getVector3fMap();
-		res += va.cross(vb);
+		std::cout<<"1"<<std::endl;
+		j = (i + 1) % num_triangles;
+		std::cout<<"2"<<std::endl;
+		k = (i + 2) % num_triangles;		
+		std::cout<<polygon.polygons[i].vertices[0]<<std::endl;
+		ax = cloud.points[polygon.polygons[i].vertices[0]].x;
+		std::cout<<"2.5"<<std::endl;
+		ay = cloud.points[polygon.polygons[i].vertices[0]].y;
+		az = cloud.points[polygon.polygons[i].vertices[0]].z;
+		bx = cloud.points[polygon.polygons[i].vertices[1]].x;
+		by = cloud.points[polygon.polygons[i].vertices[1]].y;
+		bz = cloud.points[polygon.polygons[i].vertices[1]].z;
+		cx = cloud.points[polygon.polygons[i].vertices[2]].x;
+		cy = cloud.points[polygon.polygons[i].vertices[2]].y;
+		cz = cloud.points[polygon.polygons[i].vertices[2]].z;
+		std::cout<<"3"<<std::endl;
+		acx = cx-ax;
+		acy = cy-ay;
+		acz = cz-az;
+        	abx = bx-ax;
+		aby = by-ay;
+        	abz = bz-az;
+		x = acx*abz-abx*acz;
+		y = acx*aby-abx*acz;
+		z = acx*aby-abx*acy;
+		area += sqrt(pow(x, 2.0) + pow(y, 2.0) + pow(z, 2.0));		
 	}
-	area=res.norm();
+	std::cout<<"end calculateAreaPolgyon"<<std::endl;
 	return area*0.5;
 } 
 
@@ -97,12 +119,6 @@ int main (int argc, char** argv)
 	std::ofstream output_file("properties.txt");
 	std::ofstream curvature("curvature.txt");
 	std::ofstream normals("normals.txt");
-
-	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud (new pcl::PointCloud<pcl::PointXYZ>);	
-	pcl::PCLPointCloud2::Ptr cloud_filtered (new pcl::PCLPointCloud2 ());
-
-
-	pcl::io::loadPCDFile<pcl::PointXYZ> ("my_pcd.pcd", *cloud);	
 
 	/*
 
@@ -155,8 +171,8 @@ int main (int argc, char** argv)
 	// Load input file into a PointCloud<T> with an appropriate type
 	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_filtered_converted (new pcl::PointCloud<pcl::PointXYZ>);
 	pcl::PCLPointCloud2 cloud_blob;
-	pcl::io::loadPCDFile ("my_pcd.pcd", cloud_blob);
-	pcl::fromPCLPointCloud2 (cloud_blob, *cloud_filtered_converted);
+	pcl::io::loadPCDFile (argv[filenames[0]], *cloud_filtered_converted);
+	std::cout<<"got pcd file"<<std::endl;
 	//* the data should be available in cloud
 
 	// Normal estimation*
@@ -206,8 +222,8 @@ int main (int argc, char** argv)
 
 	pcl::PointCloud<pcl::PointXYZ> triangle_cloud;
 	pcl::fromPCLPointCloud2(triangles.cloud, triangle_cloud); 
-
-	std::cout<<"surface: "<<calculateAreaPolygon(triangle_cloud)<<std::endl;
+	std::cout << "size of points " << triangle_cloud.points.size() << std::endl ;
+	std::cout<<"surface: "<<calculateAreaPolygon(triangles, triangle_cloud)<<std::endl;
 
 	/******************************************************************************************************************************************/	
 
@@ -233,7 +249,7 @@ int main (int argc, char** argv)
 	// Compute the features
 	ne.compute (*cloud_normals);
 
-	output_file << "size of first file points " << cloud_filtered_converted->points.size() << std::endl ;
+	output_file << "size of points " << cloud_filtered_converted->points.size() << std::endl ;
 
 	output_file << "size of the normals " << cloud_normals->points.size() << std::endl ; 	
 
@@ -254,7 +270,8 @@ int main (int argc, char** argv)
 
 	for ( int i = 0; i < cloud_normals->points.size() ; i++)
 	{
-		output_file<<i<<": "<<triangle_cloud.points[i].x<<", "<<triangle_cloud.points[i].y<<", "<<triangle_cloud.points[i].z<<std::endl;
+		output_file<<i<<": triangulated "<<triangle_cloud.points[i].x<<", "<<triangle_cloud.points[i].y<<", "<<triangle_cloud.points[i].z<<std::endl;
+		output_file<<i<<": normal"<<cloud_filtered_converted->points[i].x<<", "<<cloud_filtered_converted->points[i].y<<", "<<cloud_filtered_converted->points[i].z<<std::endl;
 		if(triangle_cloud.points[i].z > highest)
 		{
 			highest = triangle_cloud.points[i].z;
@@ -265,20 +282,26 @@ int main (int argc, char** argv)
 		}
 		normals <<i+1 <<": "<<" x-normal-> "<<cloud_normals->points[i].normal_x<<" y-normal-> "<<cloud_normals->points[i].normal_y<<" z-normal-> "<<cloud_normals->points[i].normal_z<<std::endl;
 		curvature <<i+1 <<": curvature: "<<cloud_normals->points[i].curvature<<std::endl;
+		
+		float x, y, z, dist, nx, ny, nz, ndist;
+		
+		/*
 
 		if(i != cloud_normals->points.size()-1){
-			float x = cloud->points[i+1].x - cloud->points[i].x;
-			float y = cloud->points[i+1].y - cloud->points[i].y;
-			float z = cloud->points[i+1].z - cloud->points[i].z;
-			float dist = sqrt(pow(x, 2)+pow(y, 2) + pow(z, 2));
+			x = cloud->points[i+1].x - cloud->points[i].x;
+			y = cloud->points[i+1].y - cloud->points[i].y;
+			z = cloud->points[i+1].z - cloud->points[i].z;
+			dist = sqrt(pow(x, 2)+pow(y, 2) + pow(z, 2));
 			output_file << i+1 <<" -> "<< i+2 << " distance normal: " << dist <<std::endl;
 			
-			float nx = triangle_cloud.points[i+1].x - triangle_cloud.points[i].x;
-			float ny = triangle_cloud.points[i+1].y - triangle_cloud.points[i].y;
-			float nz = triangle_cloud.points[i+1].z - triangle_cloud.points[i].z;
-			float ndist = sqrt(pow(nx, 2)+pow(ny, 2) + pow(nz, 2));
+			nx = triangle_cloud[i+1].indices[0] - triangle_cloud.points[i].x;
+			ny = triangle_cloud.points[i+1].y - triangle_cloud.points[i].y;
+			nz = triangle_cloud.points[i+1].z - triangle_cloud.points[i].z;
+			ndist = sqrt(pow(nx, 2)+pow(ny, 2) + pow(nz, 2));
 			output_file << i+1 <<" -> "<< i+2 << " distance triangulated: " << ndist <<std::endl;
-		}	
+		}
+
+		*/	
 		/*
 		   pcl::PointXYZRGB point;
 		   point.x = cloud_filtered_converted->points[i].x;
