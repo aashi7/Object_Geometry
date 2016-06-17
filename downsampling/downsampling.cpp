@@ -3,32 +3,41 @@
 #include <pcl/io/ply_io.h>
 #include <pcl/point_types.h>
 #include <pcl/filters/voxel_grid.h>
+#include <stdlib.h> 
 
-int
-main (int argc, char** argv)
+
+int main (int argc, char** argv)
 {
-  pcl::PCLPointCloud2::Ptr cloud (new pcl::PCLPointCloud2 ());
-  pcl::PCLPointCloud2::Ptr cloud_filtered (new pcl::PCLPointCloud2 ());
 
-  // Fill in the cloud data
-  pcl::PLYReader reader;
-  // Replace the path below with the path where you saved your file
-  reader.read ("poisson_mesh_12inch_block.ply", *cloud); // Remember to download the file first!
-  std::cerr << "PointCloud before filtering: " << cloud->width * cloud->height 
-       << " data points (" << pcl::getFieldsList (*cloud) << ").";
+	pcl::PointCloud<pcl::PointXYZ> cloud;
 
-  // Create the filtering object
-  pcl::VoxelGrid<pcl::PCLPointCloud2> sor;
-  sor.setInputCloud (cloud);
-  sor.setLeafSize (0.01f, 0.01f, 0.01f);
-  sor.filter (*cloud_filtered);
+	// Fill in the cloud data
+	cloud.width    = 8;
+	cloud.height   = 1;
+	cloud.is_dense = false;
+	cloud.points.resize (cloud.width * cloud.height);
+	
+	for(int i = 0; i < 8; i++){
+		cloud.points[i].x = rand() %10;	
+		cloud.points[i].y = rand() %10;
+		cloud.points[i].z = rand() %10;
+		std::cout<<cloud.points[i]<<std::endl;
+	}
 
-  std::cerr << "PointCloud after filtering: " << cloud_filtered->width * cloud_filtered->height 
-       << " data points (" << pcl::getFieldsList (*cloud_filtered) << ").";
-
-  pcl::PCDWriter writer;
-  writer.write ("12_inch_block_downsampled.pcd", *cloud_filtered, 
-         Eigen::Vector4f::Zero (), Eigen::Quaternionf::Identity (), false);
-
-  return (0);
+	/*
+	for (size_t i = 0; i < 2; i++){
+		for(size_t k = 0; k < 2; k++){
+			for(size_t p = 0;p < 2; p++){	
+				cloud.points[i+2*k+4*p].x = i;
+				cloud.points[i+2*k+4*p].y = k;
+				cloud.points[i+2*k+4*p].z = p;
+				std::cout<<cloud.points[i+2*k+4*p]<<std::endl;
+			}
+		}
+	}
+	*/
+	pcl::io::savePCDFileASCII ("cube.pcd", cloud);
+	std::cerr << "Saved " << cloud.points.size () << " data points to cube.pcd." << std::endl;	
+	
+	return (0);
 }

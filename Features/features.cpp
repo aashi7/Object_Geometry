@@ -57,7 +57,7 @@ float calculateAreaPolygon(pcl::PolygonMesh &polygon, const pcl::PointCloud<pcl:
 		j = (i + 1) % num_triangles;
 		std::cout<<"2"<<std::endl;
 		k = (i + 2) % num_triangles;		
-		std::cout<<polygon.polygons[i].vertices[0]<<std::endl;
+		std::cout<<polygon.polygons[i].vertices[1]<<std::endl;
 		ax = cloud.points[polygon.polygons[i].vertices[0]].x;
 		std::cout<<"2.5"<<std::endl;
 		ay = cloud.points[polygon.polygons[i].vertices[0]].y;
@@ -118,7 +118,7 @@ int main (int argc, char** argv)
 
 	std::ofstream output_file("properties.txt");
 	std::ofstream curvature("curvature.txt");
-	std::ofstream normals("normals.txt");
+	std::ofstream normals_text("normals.txt");
 
 	/*
 
@@ -169,26 +169,26 @@ int main (int argc, char** argv)
 	//std::cout<<data.size()<<std::endl;
 
 	// Load input file into a PointCloud<T> with an appropriate type
-	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_filtered_converted (new pcl::PointCloud<pcl::PointXYZ>);
+	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud (new pcl::PointCloud<pcl::PointXYZ>);
 	pcl::PCLPointCloud2 cloud_blob;
-	pcl::io::loadPCDFile (argv[filenames[0]], *cloud_filtered_converted);
-	std::cout<<"got pcd file"<<std::endl;
-	//* the data should be available in cloud
+	pcl::io::loadPCDFile ("cube.pcd", cloud_blob);
+	pcl::fromPCLPointCloud2 (cloud_blob, *cloud);	
+		//* the data should be available in cloud
 
 	// Normal estimation*
 	pcl::NormalEstimation<pcl::PointXYZ, pcl::Normal> n;
-	pcl::PointCloud<pcl::Normal>::Ptr normals1 (new pcl::PointCloud<pcl::Normal>);
-	pcl::search::KdTree<pcl::PointXYZ>::Ptr tree1 (new pcl::search::KdTree<pcl::PointXYZ>);
-	tree1->setInputCloud (cloud_filtered_converted);
-	n.setInputCloud (cloud_filtered_converted);
-	n.setSearchMethod (tree1);
+	pcl::PointCloud<pcl::Normal>::Ptr normals (new pcl::PointCloud<pcl::Normal>);
+	pcl::search::KdTree<pcl::PointXYZ>::Ptr tree (new pcl::search::KdTree<pcl::PointXYZ>);
+	tree->setInputCloud (cloud);
+	n.setInputCloud (cloud);
+	n.setSearchMethod (tree);
 	n.setKSearch (20);
-	n.compute (*normals1);
+	n.compute (*normals);
 	//* normals should not contain the point normals + surface curvatures
 
 	// Concatenate the XYZ and normal fields*
 	pcl::PointCloud<pcl::PointNormal>::Ptr cloud_with_normals (new pcl::PointCloud<pcl::PointNormal>);
-	pcl::concatenateFields (*cloud_filtered_converted, *normals1, *cloud_with_normals);
+	pcl::concatenateFields (*cloud, *normals, *cloud_with_normals);
 	//* cloud_with_normals = cloud + normals
 
 	// Create search tree*
@@ -220,10 +220,25 @@ int main (int argc, char** argv)
 	std::vector<int> parts = gp3.getPartIDs();
 	std::vector<int> states = gp3.getPointStates();	
 
-	pcl::PointCloud<pcl::PointXYZ> triangle_cloud;
-	pcl::fromPCLPointCloud2(triangles.cloud, triangle_cloud); 
-	std::cout << "size of points " << triangle_cloud.points.size() << std::endl ;
-	std::cout<<"surface: "<<calculateAreaPolygon(triangles, triangle_cloud)<<std::endl;
+	pcl::PolygonMesh::Ptr mesh(&triangles);
+	pcl::PointCloud<pcl::PointXYZ>::Ptr triangle_cloud(new pcl::PointCloud<pcl::PointXYZ>);
+	pcl::fromPCLPointCloud2(mesh->cloud, *triangle_cloud);	
+/*	for(int i = 0; i < 2; i++){
+		std::cout<<triangles.polygons[i]<<std::endl;
+	}
+*/	std::cout<<"first vertice "<<triangles.polygons[0].vertices[0] << std::endl; 	
+	
+	std::cout<<"Prolly not gonna work "<<triangle_cloud->points[triangles.polygons[0].vertices[0]] << std::endl; 	
+
+
+	//pcl::fromPCLPointCloud2(triangles.cloud, triangle_cloud); 
+	std::cout << "size of points " << triangle_cloud->points.size() << std::endl ;
+	
+	std::cout<<triangle_cloud->points[0]<<std::endl;
+	for(unsigned i = 0; i < triangle_cloud->points.size(); i++){
+		std::cout << triangle_cloud->points[i] <<"test"<< std::endl;
+	} 	
+	//std::cout<<"surface: "<<calculateAreaPolygon(triangles, triangle_cloud)<<std::endl;
 
 	/******************************************************************************************************************************************/	
 
@@ -232,13 +247,13 @@ int main (int argc, char** argv)
 	// Create the normal estimation class, and pass the input dataset to it
 	pcl::NormalEstimation<pcl::PointXYZ, pcl::Normal> ne;	
 
-	ne.setInputCloud (cloud_filtered_converted);
+	ne.setInputCloud (cloud);
 
 	// Create an empty kdtree representation, and pass it to the normal estimation object.
 	// Its content will be filled inside the object, based on the given input dataset (as no other search surface is given).
-	pcl::search::KdTree<pcl::PointXYZ>::Ptr tree (new pcl::search::KdTree<pcl::PointXYZ> ());
+	pcl::search::KdTree<pcl::PointXYZ>::Ptr tree3 (new pcl::search::KdTree<pcl::PointXYZ> ());
 
-	ne.setSearchMethod (tree);
+	ne.setSearchMethod (tree3);
 
 	// Output datasets
 	pcl::PointCloud<pcl::Normal>::Ptr cloud_normals (new pcl::PointCloud<pcl::Normal>);
@@ -249,7 +264,7 @@ int main (int argc, char** argv)
 	// Compute the features
 	ne.compute (*cloud_normals);
 
-	output_file << "size of points " << cloud_filtered_converted->points.size() << std::endl ;
+	output_file << "size of points " << cloud->points.size() << std::endl ;
 
 	output_file << "size of the normals " << cloud_normals->points.size() << std::endl ; 	
 
@@ -264,23 +279,23 @@ int main (int argc, char** argv)
 	float square_of_dist ;
 	float x1,y1,z1,x2,y2,z2 ;
 	float nu[3], nv[3], pv_pu[3], pu_pv[3] ;
-	float highest = cloud_filtered_converted->points[0].z;
-	float lowest = cloud_filtered_converted->points[0].z;
+	float highest = triangle_cloud->points[0].z;
+	float lowest = triangle_cloud->points[0].z;
 
 
 	for ( int i = 0; i < cloud_normals->points.size() ; i++)
 	{
-		output_file<<i<<": triangulated "<<triangle_cloud.points[i].x<<", "<<triangle_cloud.points[i].y<<", "<<triangle_cloud.points[i].z<<std::endl;
-		output_file<<i<<": normal"<<cloud_filtered_converted->points[i].x<<", "<<cloud_filtered_converted->points[i].y<<", "<<cloud_filtered_converted->points[i].z<<std::endl;
-		if(triangle_cloud.points[i].z > highest)
+		output_file<<i<<": triangulated "<<triangle_cloud->points[i].x<<", "<<triangle_cloud->points[i].y<<", "<<triangle_cloud->points[i].z<<std::endl;
+		output_file<<i<<": normal"<<cloud->points[i].x<<", "<<cloud->points[i].y<<", "<<cloud->points[i].z<<std::endl;
+		if(triangle_cloud->points[i].z > highest)
 		{
-			highest = triangle_cloud.points[i].z;
+			highest = triangle_cloud->points[i].z;
 		}
-		if(triangle_cloud.points[i].z < lowest)
+		if(triangle_cloud->points[i].z < lowest)
 		{
-			lowest = triangle_cloud.points[i].z;
+			lowest = triangle_cloud->points[i].z;
 		}
-		normals <<i+1 <<": "<<" x-normal-> "<<cloud_normals->points[i].normal_x<<" y-normal-> "<<cloud_normals->points[i].normal_y<<" z-normal-> "<<cloud_normals->points[i].normal_z<<std::endl;
+		normals_text <<i+1 <<": "<<" x-normal-> "<<cloud_normals->points[i].normal_x<<" y-normal-> "<<cloud_normals->points[i].normal_y<<" z-normal-> "<<cloud_normals->points[i].normal_z<<std::endl;
 		curvature <<i+1 <<": curvature: "<<cloud_normals->points[i].curvature<<std::endl;
 		
 		float x, y, z, dist, nx, ny, nz, ndist;
