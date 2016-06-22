@@ -39,10 +39,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/cs4752/perception/pcl/doc/tutorials/content/sources/Features
+CMAKE_SOURCE_DIR = /home/cs4752/Desktop/Github_Object_Geometry/hole_detection
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/cs4752/perception/pcl/doc/tutorials/content/sources/Features/build
+CMAKE_BINARY_DIR = /home/cs4752/Desktop/Github_Object_Geometry/hole_detection/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -69,9 +69,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/cs4752/perception/pcl/doc/tutorials/content/sources/Features/build/CMakeFiles /home/cs4752/perception/pcl/doc/tutorials/content/sources/Features/build/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/cs4752/Desktop/Github_Object_Geometry/hole_detection/build/CMakeFiles /home/cs4752/Desktop/Github_Object_Geometry/hole_detection/build/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/cs4752/perception/pcl/doc/tutorials/content/sources/Features/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/cs4752/Desktop/Github_Object_Geometry/hole_detection/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -99,41 +99,41 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named Features
+# Target rules for targets named hole_detection
 
 # Build rule for target.
-Features: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 Features
-.PHONY : Features
+hole_detection: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 hole_detection
+.PHONY : hole_detection
 
 # fast build rule for target.
-Features/fast:
-	$(MAKE) -f CMakeFiles/Features.dir/build.make CMakeFiles/Features.dir/build
-.PHONY : Features/fast
+hole_detection/fast:
+	$(MAKE) -f CMakeFiles/hole_detection.dir/build.make CMakeFiles/hole_detection.dir/build
+.PHONY : hole_detection/fast
 
-features.o: features.cpp.o
-.PHONY : features.o
+hole_detection.o: hole_detection.cpp.o
+.PHONY : hole_detection.o
 
 # target to build an object file
-features.cpp.o:
-	$(MAKE) -f CMakeFiles/Features.dir/build.make CMakeFiles/Features.dir/features.cpp.o
-.PHONY : features.cpp.o
+hole_detection.cpp.o:
+	$(MAKE) -f CMakeFiles/hole_detection.dir/build.make CMakeFiles/hole_detection.dir/hole_detection.cpp.o
+.PHONY : hole_detection.cpp.o
 
-features.i: features.cpp.i
-.PHONY : features.i
+hole_detection.i: hole_detection.cpp.i
+.PHONY : hole_detection.i
 
 # target to preprocess a source file
-features.cpp.i:
-	$(MAKE) -f CMakeFiles/Features.dir/build.make CMakeFiles/Features.dir/features.cpp.i
-.PHONY : features.cpp.i
+hole_detection.cpp.i:
+	$(MAKE) -f CMakeFiles/hole_detection.dir/build.make CMakeFiles/hole_detection.dir/hole_detection.cpp.i
+.PHONY : hole_detection.cpp.i
 
-features.s: features.cpp.s
-.PHONY : features.s
+hole_detection.s: hole_detection.cpp.s
+.PHONY : hole_detection.s
 
 # target to generate assembly for a file
-features.cpp.s:
-	$(MAKE) -f CMakeFiles/Features.dir/build.make CMakeFiles/Features.dir/features.cpp.s
-.PHONY : features.cpp.s
+hole_detection.cpp.s:
+	$(MAKE) -f CMakeFiles/hole_detection.dir/build.make CMakeFiles/hole_detection.dir/hole_detection.cpp.s
+.PHONY : hole_detection.cpp.s
 
 # Help Target
 help:
@@ -141,12 +141,12 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... Features"
 	@echo "... edit_cache"
+	@echo "... hole_detection"
 	@echo "... rebuild_cache"
-	@echo "... features.o"
-	@echo "... features.i"
-	@echo "... features.s"
+	@echo "... hole_detection.o"
+	@echo "... hole_detection.i"
+	@echo "... hole_detection.s"
 .PHONY : help
 
 

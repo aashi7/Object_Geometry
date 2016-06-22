@@ -8,6 +8,8 @@
 *.so
 *.cpp~
 *.swp
+*.cmake
+*.make
 
 # Packages #
 ############
