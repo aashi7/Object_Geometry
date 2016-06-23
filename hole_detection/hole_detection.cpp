@@ -14,7 +14,7 @@ void showHelp()
 	std::cout << "Commands:" << std::endl;
 	std::cout << "\n_help:  Show this help." << std::endl;
 	std::cout << "_tree:  Runs kd tree algorithm with specified K number of closest points and/or with a specified radius." << std::endl;
-	std::cout << "_quit:  Exits program.\n" << std::endl;	
+	std::cout << "_quit:  Exits program." << std::endl;	
 	std::cout << "_points:  Prints points contained in point cloud.\n" << std::endl;
 	//std::cout << "_quit:  Exits program.\n" << std::endl;
 	//std::cout << "_quit:  Exits program.\n" << std::endl;
@@ -23,14 +23,9 @@ void showHelp()
 }
 
 void points(pcl::PointCloud<pcl::PointXYZ>::Ptr &cloud){
-	
-	std::cout << std::endl;
-	std::cout << "Commands:" << std::endl;
-	std::cout << "\n_help:  Show this help." << std::endl;
-	std::cout << "_tree:  Runs kd tree algorithm with specified K number of closest points and/or with a specified radius." << std::endl;
-	std::cout << "_quit:  Exits program.\n" << std::endl;	
-	std::cout << "_points:  Prints points contained in point cloud.\n" << std::endl;
-	//std::cout << "_quit:  Exits program.\n" << std::endl;
+	for(unsigned i = 0; i < cloud->points.size(); i++){
+		std::cout<<cloud->points[i]<<std::endl;
+	}	
 }
 
 void kd_tree(pcl::PointCloud<pcl::PointXYZ>::Ptr &cloud){
@@ -185,7 +180,7 @@ int main (int argc, char** argv)
 			showHelp (argv[0]);
 		}*/
 		else{
-			std::cout <<"problem -> "<<line<< "*Error: Command not recognized enter '_help' to view help menu" << std::endl;
+			std::cout <<"problem -> "<<line<< " *Error: Command not recognized enter '_help' to view help menu" << std::endl;
 			continue;
 		}
 		std::cin.ignore(INT_MAX, '\n');
