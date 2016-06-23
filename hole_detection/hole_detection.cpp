@@ -5,6 +5,8 @@
 #include <pcl/io/pcd_io.h>
 
 #include <iostream>
+#include <sstream>
+#include <string>
 #include <vector>
 #include <ctime>
 
@@ -15,14 +17,20 @@ void showHelp()
 	std::cout << "\n_help:  Show this help." << std::endl;
 	std::cout << "_tree:  Runs kd tree algorithm with specified K number of closest points and/or with a specified radius." << std::endl;
 	std::cout << "_quit:  Exits program." << std::endl;	
-	std::cout << "_points:  Prints points contained in point cloud.\n" << std::endl;
-	//std::cout << "_quit:  Exits program.\n" << std::endl;
-	//std::cout << "_quit:  Exits program.\n" << std::endl;
+	std::cout << "_points:  Prints points contained in point cloud." << std::endl;
+	std::cout << "_normals:  Prints normals of points in cloud." << std::endl;
+	std::cout << "_holes:  Calculates hole (returns set of points on boundary and visualizes image with boundary points red).\n" << std::endl;
 
 
 }
 
 void points(pcl::PointCloud<pcl::PointXYZ>::Ptr &cloud){
+	for(unsigned i = 0; i < cloud->points.size(); i++){
+		std::cout<<cloud->points[i]<<std::endl;
+	}
+}
+
+void normals(pcl::PointCloud<pcl::PointXYZ>::Ptr &cloud){
 	for(unsigned i = 0; i < cloud->points.size(); i++){
 		std::cout<<cloud->points[i]<<std::endl;
 	}
@@ -115,6 +123,49 @@ void kd_tree(pcl::PointCloud<pcl::PointXYZ>::Ptr &cloud){
 	}
 }
 
+void calculate_hole(pcl::PointCloud<pcl::PointXYZ>::Ptr &cloud){
+	
+
+	srand (time (NULL));
+
+	pcl::KdTreeFLANN<pcl::PointXYZ> kdtree;
+
+	kdtree.setInputCloud (cloud);
+
+	pcl::PointXYZ searchPoint;
+
+	std::string coor[3] = {"","",""};	
+
+	std::cout<< "Enter a search point xyz value separated by spaces: " <<std::endl;
+	std::string line;
+	std::getline(std::cin, line);
+	std::stringstream stream(line);
+	for(int i  = 0; i < 3; i++) {
+		stream >> coor[i];
+		if(!stream)
+			break;
+		std::cout << "Found integer: " << coor[i] << "\n";
+	}
+	std::cout<< coor[0] <<" "<< coor[1] <<" "<< coor[2] <<std::endl;
+
+	std::cout<< "Enter a K value: " <<std::endl;
+	int K = 0;
+	std::cin >> K;
+
+	// K nearest neighbor search
+	std::vector<int> pointIdxNKNSearch(K);
+	std::vector<float> pointNKNSquaredDistance(K);
+	kdtree.nearestKSearch (searchPoint, K, pointIdxNKNSearch, pointNKNSquaredDistance);
+
+	std::cout<< "Enter a radius: " <<std::endl;
+	int radius = 0;
+	std::cin >> radius;
+
+	// Neighbors within radius search
+	std::vector<int> pointIdxRadiusSearch;
+	std::vector<float> pointRadiusSquaredDistance;
+	kdtree.radiusSearch (searchPoint, radius, pointIdxRadiusSearch, pointRadiusSquaredDistance);	
+}
 // This is the main function
 int main (int argc, char** argv)
 {
@@ -173,12 +224,13 @@ int main (int argc, char** argv)
 		else if (line == "_points") {
 			points (cloud);
 		}
-		/*else if (pcl::console::find_switch (argc, argv, "-h") || pcl::console::find_switch (argc, argv, "--help")) {
-			showHelp (argv[0]);
+		else if (line == "_normals") {
+			normals (cloud);
 		}
-		else if (pcl::console::find_switch (argc, argv, "-h") || pcl::console::find_switch (argc, argv, "--help")) {
-			showHelp (argv[0]);
-		}*/
+		else if (line == "_holes") {
+			calculate_hole (cloud);
+			std::cin.ignore(INT_MAX, '\n');
+		}
 		else{
 			std::cout <<"problem -> "<<line<< " *Error: Command not recognized enter '_help' to view help menu" << std::endl;
 		}

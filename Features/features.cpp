@@ -220,9 +220,6 @@ int main (int argc, char** argv)
 	std::vector<int> parts = gp3.getPartIDs();
 	std::vector<int> states = gp3.getPointStates();	
 
-	pcl::PolygonMesh::Ptr mesh(&triangles);
-	pcl::PointCloud<pcl::PointXYZ>::Ptr triangle_cloud(new pcl::PointCloud<pcl::PointXYZ>);
-	pcl::fromPCLPointCloud2(mesh->cloud, *triangle_cloud);	
 /*	for(int i = 0; i < 2; i++){
 		std::cout<<triangles.polygons[i]<<std::endl;
 	}
