@@ -25,7 +25,7 @@ void showHelp()
 void points(pcl::PointCloud<pcl::PointXYZ>::Ptr &cloud){
 	for(unsigned i = 0; i < cloud->points.size(); i++){
 		std::cout<<cloud->points[i]<<std::endl;
-	}	
+	}
 }
 
 void kd_tree(pcl::PointCloud<pcl::PointXYZ>::Ptr &cloud){
@@ -75,16 +75,16 @@ void kd_tree(pcl::PointCloud<pcl::PointXYZ>::Ptr &cloud){
 		std::vector<float> pointNKNSquaredDistance(K);
 
 		std::cout << "K nearest neighbor search at (" << searchPoint.x 
-			<< " " << searchPoint.y 
-			<< " " << searchPoint.z
+			<< ", " << searchPoint.y 
+			<< ", " << searchPoint.z
 			<< ") with K=" << K << std::endl;
 
 		if ( kdtree.nearestKSearch (searchPoint, K, pointIdxNKNSearch, pointNKNSquaredDistance) > 0 )
 		{
 			for (size_t i = 0; i < pointIdxNKNSearch.size (); ++i)
 				std::cout << "    "  <<   cloud->points[ pointIdxNKNSearch[i] ].x 
-					<< " " << cloud->points[ pointIdxNKNSearch[i] ].y 
-					<< " " << cloud->points[ pointIdxNKNSearch[i] ].z 
+					<< ", " << cloud->points[ pointIdxNKNSearch[i] ].y 
+					<< ", " << cloud->points[ pointIdxNKNSearch[i] ].z 
 					<< " (squared distance: " << pointNKNSquaredDistance[i] << ")" << std::endl;
 		}
 	}
@@ -99,8 +99,8 @@ void kd_tree(pcl::PointCloud<pcl::PointXYZ>::Ptr &cloud){
 		std::vector<float> pointRadiusSquaredDistance;
 
 		std::cout << "Neighbors within radius search at (" << searchPoint.x 
-			<< " " << searchPoint.y 
-			<< " " << searchPoint.z
+			<< ", " << searchPoint.y 
+			<< ", " << searchPoint.z
 			<< ") with radius=" << radius << std::endl;
 
 
@@ -108,8 +108,8 @@ void kd_tree(pcl::PointCloud<pcl::PointXYZ>::Ptr &cloud){
 		{
 			for (size_t i = 0; i < pointIdxRadiusSearch.size (); ++i)
 				std::cout << "    "  <<   cloud->points[ pointIdxRadiusSearch[i] ].x 
-					<< " " << cloud->points[ pointIdxRadiusSearch[i] ].y 
-					<< " " << cloud->points[ pointIdxRadiusSearch[i] ].z 
+					<< ", " << cloud->points[ pointIdxRadiusSearch[i] ].y 
+					<< ", " << cloud->points[ pointIdxRadiusSearch[i] ].z 
 					<< " (squared distance: " << pointRadiusSquaredDistance[i] << ")" << std::endl;
 		}
 	}
@@ -158,7 +158,7 @@ int main (int argc, char** argv)
 	while(true){
 		std::cout<<">> ";
 		std::string line;
-		getline(std::cin, line);
+		getline(std::cin, line, '\n');
 		// Show help
 		if (line == "_quit"){
 			break;
@@ -172,6 +172,7 @@ int main (int argc, char** argv)
 		}
 		else if (line == "_points") {
 			points (cloud);
+			continue;
 		}
 		/*else if (pcl::console::find_switch (argc, argv, "-h") || pcl::console::find_switch (argc, argv, "--help")) {
 			showHelp (argv[0]);
@@ -183,6 +184,7 @@ int main (int argc, char** argv)
 			std::cout <<"problem -> "<<line<< " *Error: Command not recognized enter '_help' to view help menu" << std::endl;
 			continue;
 		}
+		
 		std::cin.ignore(INT_MAX, '\n');
 	}
 	return 0;
