@@ -158,21 +158,20 @@ int main (int argc, char** argv)
 	while(true){
 		std::cout<<">> ";
 		std::string line;
-		getline(std::cin, line, '\n');
+		getline(std::cin, line);
 		// Show help
 		if (line == "_quit"){
 			break;
 		}
 		else if (line == "_help") {
 			showHelp ();
-			continue;
 		}
 		else if (line == "_tree") {
 			kd_tree (cloud);
+			std::cin.ignore(INT_MAX, '\n');
 		}
 		else if (line == "_points") {
 			points (cloud);
-			continue;
 		}
 		/*else if (pcl::console::find_switch (argc, argv, "-h") || pcl::console::find_switch (argc, argv, "--help")) {
 			showHelp (argv[0]);
@@ -182,10 +181,7 @@ int main (int argc, char** argv)
 		}*/
 		else{
 			std::cout <<"problem -> "<<line<< " *Error: Command not recognized enter '_help' to view help menu" << std::endl;
-			continue;
 		}
-		
-		std::cin.ignore(INT_MAX, '\n');
 	}
 	return 0;
 }

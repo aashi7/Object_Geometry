@@ -43,6 +43,12 @@ ehthumbs.db
 Thumbs.db
 
 # CMake/Make generated files #
-######################
+##############################
 CMakeFiles
 CMakeCache.txt
+
+# Executable files without extension #
+######################################
+* #ignores all files
+!*/ #unignores anything in a directory
+!*.* #unignores all files with extensions
