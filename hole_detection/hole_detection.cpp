@@ -3,6 +3,7 @@
 #include <pcl/console/parse.h>
 #include <pcl/io/ply_io.h>
 #include <pcl/io/pcd_io.h>
+#include <pcl/features/normal_3d.h>
 
 #include <iostream>
 #include <sstream>
@@ -31,10 +32,71 @@ void points(pcl::PointCloud<pcl::PointXYZ>::Ptr &cloud){
 }
 
 void normals(pcl::PointCloud<pcl::PointXYZ>::Ptr &cloud){
-	for(unsigned i = 0; i < cloud->points.size(); i++){
-		std::cout<<cloud->points[i]<<std::endl;
+	// Create the normal estimation class, and pass the input dataset to it
+	pcl::NormalEstimation<pcl::PointXYZ, pcl::Normal> ne;	
+
+	ne.setInputCloud (cloud);
+
+	// Create an empty kdtree representation, and pass it to the normal estimation object.
+	// Its content will be filled inside the object, based on the given input dataset (as no other search surface is given).
+	pcl::search::KdTree<pcl::PointXYZ>::Ptr tree3 (new pcl::search::KdTree<pcl::PointXYZ> ());
+
+	ne.setSearchMethod (tree3);
+
+	// Output datasets
+	pcl::PointCloud<pcl::Normal>::Ptr cloud_normals (new pcl::PointCloud<pcl::Normal>);
+
+	// Use all neighbors in a sphere of radius 3cm
+	ne.setRadiusSearch (0.03);
+
+	// Compute the features
+	ne.compute (*cloud_normals);
+
+	std::cout << "size of the normals " << cloud_normals->points.size() << std::endl ; 		
+	for(unsigned i = 0; i < cloud_normals->points.size(); i++){
+		std::cout<< cloud_normals->points[i] <<std::endl;
 	}
 }
+
+float calculateAreaPolygon(pcl::PolygonMesh &polygon, const pcl::PointCloud<pcl::PointXYZ> &cloud)
+{
+	std::cout<<"in calculateAreaPolgyon"<<std::endl;
+	float area=0.0;
+	int num_triangles = polygon.polygons.capacity();
+	std::cout<<num_triangles<<" triangles"<<std::endl;
+	int j, k, ax, ay, az, bx, by, bz, cx, cy, cz, acx, acy, acz, abx, aby, abz, x, y, z;
+	for (int i = 0; i < 8; i++)
+	{
+		std::cout<<"1"<<std::endl;
+		j = (i + 1) % num_triangles;
+		std::cout<<"2"<<std::endl;
+		k = (i + 2) % num_triangles;		
+		std::cout<<polygon.polygons[i].vertices[1]<<std::endl;
+		ax = cloud.points[polygon.polygons[i].vertices[0]].x;
+		std::cout<<"2.5"<<std::endl;
+		ay = cloud.points[polygon.polygons[i].vertices[0]].y;
+		az = cloud.points[polygon.polygons[i].vertices[0]].z;
+		bx = cloud.points[polygon.polygons[i].vertices[1]].x;
+		by = cloud.points[polygon.polygons[i].vertices[1]].y;
+		bz = cloud.points[polygon.polygons[i].vertices[1]].z;
+		cx = cloud.points[polygon.polygons[i].vertices[2]].x;
+		cy = cloud.points[polygon.polygons[i].vertices[2]].y;
+		cz = cloud.points[polygon.polygons[i].vertices[2]].z;
+		std::cout<<"3"<<std::endl;
+		acx = cx-ax;
+		acy = cy-ay;
+		acz = cz-az;
+        	abx = bx-ax;
+		aby = by-ay;
+        	abz = bz-az;
+		x = acx*abz-abx*acz;
+		y = acx*aby-abx*acz;
+		z = acx*aby-abx*acy;
+		area += sqrt(pow(x, 2.0) + pow(y, 2.0) + pow(z, 2.0));		
+	}
+	std::cout<<"end calculateAreaPolgyon"<<std::endl;
+	return area*0.5;
+} 
 
 void kd_tree(pcl::PointCloud<pcl::PointXYZ>::Ptr &cloud){
 	bool r = false;
@@ -125,7 +187,7 @@ void kd_tree(pcl::PointCloud<pcl::PointXYZ>::Ptr &cloud){
 
 void calculate_hole(pcl::PointCloud<pcl::PointXYZ>::Ptr &cloud){
 	
-
+/****************K POINTS & RADIUS POINTS*****************************/
 	srand (time (NULL));
 
 	pcl::KdTreeFLANN<pcl::PointXYZ> kdtree;
@@ -165,6 +227,30 @@ void calculate_hole(pcl::PointCloud<pcl::PointXYZ>::Ptr &cloud){
 	std::vector<int> pointIdxRadiusSearch;
 	std::vector<float> pointRadiusSquaredDistance;
 	kdtree.radiusSearch (searchPoint, radius, pointIdxRadiusSearch, pointRadiusSquaredDistance);	
+/**********************************************************************/
+
+/************** NORMALS ***********************************************/
+// Create the normal estimation class, and pass the input dataset to it
+	pcl::NormalEstimation<pcl::PointXYZ, pcl::Normal> ne;	
+
+	ne.setInputCloud (cloud);
+
+	// Create an empty kdtree representation, and pass it to the normal estimation object.
+	// Its content will be filled inside the object, based on the given input dataset (as no other search surface is given).
+	pcl::search::KdTree<pcl::PointXYZ>::Ptr tree3 (new pcl::search::KdTree<pcl::PointXYZ> ());
+
+	ne.setSearchMethod (tree3);
+
+	// Output datasets
+	pcl::PointCloud<pcl::Normal>::Ptr cloud_normals (new pcl::PointCloud<pcl::Normal>);
+
+	// Use all neighbors in a sphere of radius 3cm
+	ne.setRadiusSearch (0.03);
+
+	// Compute the features
+	ne.compute (*cloud_normals);
+/**********************************************************************/
+
 }
 // This is the main function
 int main (int argc, char** argv)
