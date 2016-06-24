@@ -91,31 +91,6 @@ int main (int argc, char** argv)
 {
 
 	/* DOWNSAMPLING ********************************************************************************************************************/
-
-
-	// Fill in the cloud data
-	if (pcl::console::find_switch (argc, argv, "-h") || pcl::console::find_switch (argc, argv, "--help")) {
-		showHelp (argv[0]);
-		return 0;
-	}
-
-	// Fetch point cloud filename in arguments | Works with PCD and PLY files
-	std::vector<int> filenames;
-	bool file_is_pcd = false;
-
-	filenames = pcl::console::parse_file_extension_argument (argc, argv, ".ply");
-
-	if (filenames.size () != 1)  {
-		filenames = pcl::console::parse_file_extension_argument (argc, argv, ".pcd");
-
-		if (filenames.size () != 1) {
-			showHelp (argv[0]);
-			return -1;
-		} else {
-			file_is_pcd = true;
-		}
-	}
-
 	std::ofstream output_file("properties.txt");
 	std::ofstream curvature("curvature.txt");
 	std::ofstream normals_text("normals.txt");
@@ -171,8 +146,10 @@ int main (int argc, char** argv)
 	// Load input file into a PointCloud<T> with an appropriate type
 	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud (new pcl::PointCloud<pcl::PointXYZ>);
 	pcl::PCLPointCloud2 cloud_blob;
-	pcl::io::loadPCDFile ("cube.pcd", cloud_blob);
-	pcl::fromPCLPointCloud2 (cloud_blob, *cloud);	
+	pcl::io::loadPCDFile ("mini_soccer_ball_downsampled.pcd", cloud_blob);
+	pcl::fromPCLPointCloud2 (cloud_blob, *cloud);		
+	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud1 (new pcl::PointCloud<pcl::PointXYZ>);
+	pcl::fromPCLPointCloud2 (cloud_blob, *cloud1);
 		//* the data should be available in cloud
 
 	// Normal estimation*
@@ -188,7 +165,7 @@ int main (int argc, char** argv)
 
 	// Concatenate the XYZ and normal fields*
 	pcl::PointCloud<pcl::PointNormal>::Ptr cloud_with_normals (new pcl::PointCloud<pcl::PointNormal>);
-	pcl::concatenateFields (*cloud, *normals, *cloud_with_normals);
+	pcl::concatenateFields (*cloud, *normals,*cloud_with_normals);
 	//* cloud_with_normals = cloud + normals
 
 	// Create search tree*
@@ -220,12 +197,15 @@ int main (int argc, char** argv)
 	std::vector<int> parts = gp3.getPartIDs();
 	std::vector<int> states = gp3.getPointStates();	
 
+	pcl::PolygonMesh::Ptr mesh(&triangles);
+	pcl::PointCloud<pcl::PointXYZ>::Ptr triangle_cloud(new pcl::PointCloud<pcl::PointXYZ>);
+	pcl::fromPCLPointCloud2(mesh->cloud, *triangle_cloud);	
 /*	for(int i = 0; i < 2; i++){
 		std::cout<<triangles.polygons[i]<<std::endl;
 	}
 */	std::cout<<"first vertice "<<triangles.polygons[0].vertices[0] << std::endl; 	
 	
-	std::cout<<"Prolly not gonna work "<<triangle_cloud->points[triangles.polygons[0].vertices[0]] << std::endl; 	
+	//std::cout<<"Prolly not gonna work "<<triangle_cloud->points[triangles.polygons[0].vertices[0]] << std::endl; 	
 
 
 	//pcl::fromPCLPointCloud2(triangles.cloud, triangle_cloud); 
@@ -233,7 +213,7 @@ int main (int argc, char** argv)
 	
 	std::cout<<triangle_cloud->points[0]<<std::endl;
 	for(unsigned i = 0; i < triangle_cloud->points.size(); i++){
-		std::cout << triangle_cloud->points[i] <<"test"<< std::endl;
+		std::cout << triangles.polgyons[i].getVector3fMap() <<"test"<< std::endl;
 	} 	
 	//std::cout<<"surface: "<<calculateAreaPolygon(triangles, triangle_cloud)<<std::endl;
 
@@ -283,7 +263,7 @@ int main (int argc, char** argv)
 	for ( int i = 0; i < cloud_normals->points.size() ; i++)
 	{
 		output_file<<i<<": triangulated "<<triangle_cloud->points[i].x<<", "<<triangle_cloud->points[i].y<<", "<<triangle_cloud->points[i].z<<std::endl;
-		output_file<<i<<": normal"<<cloud->points[i].x<<", "<<cloud->points[i].y<<", "<<cloud->points[i].z<<std::endl;
+		output_file<<i<<": normal"<<cloud1->points[i].x<<", "<<cloud1->points[i].y<<", "<<cloud1->points[i].z<<std::endl;
 		if(triangle_cloud->points[i].z > highest)
 		{
 			highest = triangle_cloud->points[i].z;
